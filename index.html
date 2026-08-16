@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خِدْمَتي — اطلبها… بتوصلك</title>
+  <meta name="description" content="خِدْمَتي منصة لطلب الخدمات في اللاذقية وسوريا">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f5f7fb;color:#172033}
+    header{background:linear-gradient(135deg,#1266f1,#18a6a6);color:#fff;padding:22px 18px 28px;border-radius:0 0 28px 28px}
+    .top{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:auto}
+    .logo{font-size:27px;font-weight:800}.tag{font-size:13px;opacity:.9}
+    .hero{max-width:900px;margin:28px auto 0}
+    .hero h1{font-size:30px;margin:0 0 8px}.hero p{margin:0 0 20px;opacity:.92}
+    .search{background:#fff;padding:10px;border-radius:18px;display:flex;gap:8px;box-shadow:0 10px 30px #0002}
+    .search input{flex:1;border:0;outline:0;padding:13px;font-size:15px;min-width:0}
+    button{border:0;border-radius:13px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .primary{background:#1266f1;color:#fff}.white{background:#fff;color:#1266f1}
+    main{max-width:900px;margin:24px auto;padding:0 16px}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+    .section-title h2{font-size:20px;margin:0}.hint{font-size:12px;color:#687386}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card{background:#fff;border:1px solid #e6eaf0;border-radius:18px;padding:17px;text-align:right;box-shadow:0 5px 18px #1720330b;transition:.15s}
+    .card:active{transform:scale(.98)}
+    .icon{font-size:28px}.card b{display:block;margin:8px 0 4px}.card span{font-size:12px;color:#718096}
+    .cta{margin:24px 0;background:#172033;color:#fff;border-radius:20px;padding:20px}
+    .cta h3{margin:0 0 7px}.cta p{margin:0 0 14px;color:#d7deea;font-size:13px}
+    footer{text-align:center;color:#778196;padding:25px 10px;font-size:12px}
+    .modal{display:none;position:fixed;inset:0;background:#0008;z-index:5;padding:18px;align-items:flex-end;justify-content:center}
+    .modal.open{display:flex}
+    .box{background:#fff;width:min(560px,100%);border-radius:24px;padding:20px;max-height:90vh;overflow:auto}
+    .box-head{display:flex;justify-content:space-between;align-items:center}.close{background:#eef1f5;color:#333}
+    label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+    input,textarea,select{width:100%;padding:13px;border:1px solid #d9dfe8;border-radius:12px;font:inherit;outline:0}
+    textarea{min-height:100px;resize:vertical}
+    .notice{background:#eef7ff;color:#1457a6;padding:11px;border-radius:12px;font-size:12px;margin-top:12px}
+    @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.modal{align-items:center}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div><div class="logo">خِدْمَتي</div><div class="tag">اطلبها… بتوصلك</div></div>
+    <button class="white" onclick="openModal('provider')">سجّل كمقدّم خدمة</button>
+  </div>
+  <div class="hero">
+    <h1>شو بدك؟</h1>
+    <p>اطلب الخدمة اللي بدك ياها من مقدّمي الخدمات القريبين منك.</p>
+    <div class="search">
+      <input id="search" placeholder="مثلاً: بدي كهربائي يصلّح قاطع">
+      <button class="primary" onclick="searchService()">بحث</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="section-title"><h2>الخدمات</h2><span class="hint">نبدأ من اللاذقية</span></div>
+  <div class="grid" id="services"></div>
+
+  <section class="cta">
+    <h3>ما لقيت اللي بدك ياه؟</h3>
+    <p>اكتب طلبك وسنضيفه ضمن الخدمات المطلوبة في منطقتك.</p>
+    <button class="primary" onclick="openModal('request')">اطلب خدمة الآن</button>
+  </section>
+</main>
+
+<footer>خِدْمَتي © 2026 — منصة خدمات محلية تبدأ من اللاذقية</footer>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <div class="box-head"><h2 id="modalTitle">طلب خدمة</h2><button class="close" onclick="closeModal()">إغلاق</button></div>
+    <form id="form" onsubmit="submitForm(event)">
+      <label>الخدمة</label>
+      <select id="service"></select>
+      <label>المنطقة</label>
+      <input id="area" placeholder="مثلاً: الرمل، الزراعة، المشروع...">
+      <label>وصف الطلب</label>
+      <textarea id="details" placeholder="اشرح لنا شو المشكلة أو شو الخدمة المطلوبة"></textarea>
+      <label>رقم للتواصل</label>
+      <input id="phone" type="tel" placeholder="رقم الهاتف أو واتساب">
+      <div class="notice">هذه نسخة تجريبية. حالياً لا يوجد دفع إلكتروني داخل الموقع.</div>
+      <button class="primary" style="width:100%;margin-top:15px">إرسال الطلب</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const services = [
+  ["🔧","صيانة منزلية","كهرباء، سباكة، تمديدات"],
+  ["📱","موبايلات وكمبيوتر","صيانة وبرمجة وأجهزة"],
+  ["🚗","سيارات","ميكانيك، كهرباء، خدمات"],
+  ["🏠","منزل","تنظيف، دهان، نقل أثاث"],
+  ["📚","دروس خصوصية","مدرسين لمختلف المواد"],
+  ["🚚","نقل وتوصيل","نقل أغراض وطلبات"],
+  ["💄","تجميل وعناية","حلاقين، صالونات، مكياج"],
+  ["📸","تصوير ومناسبات","تصوير، فيديو، مناسبات"],
+  ["💻","خدمات رقمية","تصميم، ترجمة، مونتاج"],
+  ["🛒","شراء وتوصيل","طلبات من المحلات للبيت"]
+];
+
+const grid=document.getElementById("services");
+const select=document.getElementById("service");
+services.forEach((s,i)=>{
+  grid.innerHTML += `<button class="card" onclick="openModal('request',${i})"><div class="icon">${s[0]}</div><b>${s[1]}</b><span>${s[2]}</span></button>`;
+  select.innerHTML += `<option value="${i}">${s[1]}</option>`;
+});
+
+function openModal(type,index){
+  document.getElementById("modal").classList.add("open");
+  document.getElementById("modalTitle").textContent=type==="provider"?"تسجيل مقدّم خدمة":"طلب خدمة";
+  if(index!==undefined) document.getElementById("service").value=index;
+}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function searchService(){
+  const q=document.getElementById("search").value.trim();
+  if(!q){openModal("request");return}
+  document.getElementById("details").value=q;
+  openModal("request");
+}
+function submitForm(e){
+  e.preventDefault();
+  alert("تم تسجيل الطلب تجريبياً ❤️\nبالنسخة القادمة سنربطه بنظام الطلبات ومقدمي الخدمات.");
+  e.target.reset();
+  closeModal();
+}
+</script>
+</body>
+</html>
