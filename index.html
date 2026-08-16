@@ -5,7 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>خِدْمَتي — اطلبها… بتوصلك</title>
   <meta name="description" content="خِدْمَتي منصة لطلب الخدمات في اللاذقية وسوريا">
-  <style>
+ .ad-box{
+  margin:24px 0;
+  background:#fff;
+  border:1px solid #e6eaf0;
+  border-radius:20px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  box-shadow:0 5px 18px #1720330b
+}
+.ad-box h3{margin:5px 0}
+.ad-box p{margin:0;color:#687386;font-size:13px}
+.ad-icon{font-size:30px}
+@media(max-width:550px){
+  .ad-box{flex-direction:column;align-items:stretch}
+  .ad-box button{width:100%}
+} <style>
     *{box-sizing:border-box}
     body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f5f7fb;color:#172033}
     header{background:linear-gradient(135deg,#1266f1,#18a6a6);color:#fff;padding:22px 18px 28px;border-radius:0 0 28px 28px}
@@ -57,7 +75,14 @@
 <main>
   <div class="section-title"><h2>الخدمات</h2><span class="hint">نبدأ من اللاذقية</span></div>
   <div class="grid" id="services"></div>
-
+<section class="ad-box">
+  <div>
+    <div class="ad-icon">📢</div>
+    <h3>عندك محل أو مشروع؟</h3>
+    <p>خلّي إعلانك يظهر لزوار خِدْمَتي ووصّل خدماتك لزبائن جدد.</p>
+  </div>
+  <button class="primary" onclick="openModal('ad')">أعلن معنا</button>
+</section>
   <section class="cta">
     <h3>ما لقيت اللي بدك ياه؟</h3>
     <p>اكتب طلبك وسنضيفه ضمن الخدمات المطلوبة في منطقتك.</p>
@@ -71,8 +96,23 @@
   <div class="box">
     <div class="box-head"><h2 id="modalTitle">طلب خدمة</h2><button class="close" onclick="closeModal()">إغلاق</button></div>
     <form id="form" onsubmit="submitForm(event)">
-      <label>الخدمة</label>
-      <select id="service"></select>
+      <div id="normalService">
+  <label>الخدمة</label>
+  <select id="service"></select>
+</div>
+
+<div id="adFields" style="display:none">
+  <label>اسم المحل أو المشروع</label>
+  <input id="adName" placeholder="مثلاً: محل حيدر للموبايلات">
+
+  <label>نوع الإعلان</label>
+  <select id="adType">
+    <option>إعلان عادي</option>
+    <option>إعلان مميز</option>
+    <option>إعلان لمدة شهر</option>
+  </select>
+</div>
+  
       <label>المنطقة</label>
       <input id="area" placeholder="مثلاً: الرمل، الزراعة، المشروع...">
       <label>وصف الطلب</label>
@@ -106,7 +146,43 @@ services.forEach((s,i)=>{
   select.innerHTML += `<option value="${i}">${s[1]}</option>`;
 });
 
-function openModal(type,index){
+functfunction openModal(type,index){
+  document.getElementById("modal").classList.add("open");
+
+  const normalService = document.getElementById("normalService");
+  const adFields = document.getElementById("adFields");
+
+  if(type==="provider"){
+    document.getElementById("modalTitle").textContent="تسجيل مقدّم خدمة";
+    normalService.style.display="block";
+    adFields.style.display="none";
+  }else if(type==="ad"){
+    document.getElementById("modalTitle").textContent="📢 طلب إعلان";
+    normalService.style.display="none";
+    adFields.style.display="block";
+  }else{
+    document.getElementById("modalTitle").textContent="طلب خدمة";
+    normalService.style.display="block";
+    adFields.style.display="none";
+
+    if(index!==undefined){
+      document.getElementById("service").value=index;
+    }
+  }
+}{
+  document.getElementById("modal").classList.add("open");
+
+  if(type==="provider"){
+    document.getElementById("modalTitle").textContent="تسجيل مقدّم خدمة";
+  }else if(type==="ad"){
+    document.getElementById("modalTitle").textContent="📢 طلب إعلان";
+  }else{
+    document.getElementById("modalTitle").textContent="طلب خدمة";
+    if(index!==undefined){
+      document.getElementById("service").value=index;
+    }
+  }
+}{
   document.getElementById("modal").classList.add("open");
   document.getElementById("modalTitle").textContent=type==="provider"?"تسجيل مقدّم خدمة":"طلب خدمة";
   if(index!==undefined) document.getElementById("service").value=index;
@@ -119,6 +195,33 @@ function searchService(){
   openModal("request");
 }
 function submitForm(e){
+  e.preventDefault();
+
+  const title = document.getElementById("modalTitle").textContent;
+
+  if(title.includes("إعلان")){
+    const name = document.getElementById("adName").value.trim();
+    const type = document.getElementById("adType").value;
+    const phone = document.getElementById("phone").value.trim();
+
+    if(!name || !phone){
+      alert("رجاءً اكتب اسم المحل ورقم التواصل.");
+      return;
+    }
+
+    alert(
+      "تم تسجيل طلب الإعلان 📢❤️\n\n" +
+      "المحل: " + name + "\n" +
+      "نوع الإعلان: " + type + "\n" +
+      "رقم التواصل: " + phone
+    );
+  }else{
+    alert("تم تسجيل الطلب تجريبياً ❤️");
+  }
+
+  e.target.reset();
+  closeModal();
+}{
   e.preventDefault();
   alert("تم تسجيل الطلب تجريبياً ❤️\nبالنسخة القادمة سنربطه بنظام الطلبات ومقدمي الخدمات.");
   e.target.reset();
