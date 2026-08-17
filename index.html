@@ -1,667 +1,434 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خِدْمَتي — اطلبها… بتوصلك</title>
+<meta name="description" content="خِدْمَتي منصة خدمات محلية في سوريا">
 
-  <title>خِدْمَتي — اطلبها… بتوصلك</title>
-  <meta name="description" content="خِدْمَتي منصة لطلب الخدمات والإعلانات المحلية في سوريا">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f5f7fb;
-      color: #172033;
-    }
-
-    header {
-      background: linear-gradient(135deg, #1266f1, #18a6a6);
-      color: white;
-      padding: 22px 18px 28px;
-      border-radius: 0 0 28px 28px;
-    }
-
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 900px;
-      margin: auto;
-      gap: 10px;
-    }
-
-    .logo {
-      font-size: 27px;
-      font-weight: 800;
-    }
-
-    .tag {
-      font-size: 13px;
-      opacity: .9;
-    }
-
-    .hero {
-      max-width: 900px;
-      margin: 28px auto 0;
-    }
-
-    .hero h1 {
-      font-size: 30px;
-      margin: 0 0 8px;
-    }
-
-    .hero p {
-      margin: 0 0 20px;
-      opacity: .92;
-    }
-
-    .search {
-      background: white;
-      padding: 10px;
-      border-radius: 18px;
-      display: flex;
-      gap: 8px;
-      box-shadow: 0 10px 30px #0002;
-    }
-
-    .search input {
-      flex: 1;
-      border: 0;
-      outline: 0;
-      padding: 13px;
-      font-size: 15px;
-      min-width: 0;
-    }
-
-    button {
-      border: 0;
-      border-radius: 13px;
-      padding: 12px 16px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .primary {
-      background: #1266f1;
-      color: white;
-    }
-
-    .white {
-      background: white;
-      color: #1266f1;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 24px 0 12px;
-    }
-
-    .section-title h2 {
-      font-size: 20px;
-      margin: 0;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: #687386;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #e6eaf0;
-      border-radius: 18px;
-      padding: 17px;
-      text-align: right;
-      box-shadow: 0 5px 18px #1720330b;
-      transition: .15s;
-    }
-
-    .card:active {
-      transform: scale(.98);
-    }
-
-    .icon {
-      font-size: 28px;
-    }
-
-    .card b {
-      display: block;
-      margin: 8px 0 4px;
-    }
-
-    .card span {
-      font-size: 12px;
-      color: #718096;
-    }
-
-    .ad-box {
-      margin: 24px 0;
-      background: linear-gradient(135deg, #ffffff, #eef7ff);
-      border: 1px solid #dcecff;
-      border-radius: 20px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      box-shadow: 0 5px 18px #1720330b;
-    }
-
-    .ad-icon {
-      font-size: 30px;
-    }
-
-    .ad-box h3 {
-      margin: 5px 0;
-    }
-
-    .ad-box p {
-      margin: 0;
-      color: #687386;
-      font-size: 13px;
-    }
-
-    .cta {
-      margin: 24px 0;
-      background: #172033;
-      color: white;
-      border-radius: 20px;
-      padding: 20px;
-    }
-
-    .cta h3 {
-      margin: 0 0 7px;
-    }
-
-    .cta p {
-      margin: 0 0 14px;
-      color: #d7deea;
-      font-size: 13px;
-    }
-
-    footer {
-      text-align: center;
-      color: #778196;
-      padding: 25px 10px;
-      font-size: 12px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #0008;
-      z-index: 5;
-      padding: 18px;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .modal.open {
-      display: flex;
-    }
-
-    .box {
-      background: white;
-      width: min(560px, 100%);
-      border-radius: 24px;
-      padding: 20px;
-      max-height: 90vh;
-      overflow: auto;
-    }
-
-    .box-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .close {
-      background: #eef1f5;
-      color: #333;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      margin: 14px 0 6px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d9dfe8;
-      border-radius: 12px;
-      font: inherit;
-      outline: 0;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .notice {
-      background: #eef7ff;
-      color: #1457a6;
-      padding: 11px;
-      border-radius: 12px;
-      font-size: 12px;
-      margin-top: 12px;
-    }
-
-    @media (min-width: 650px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .modal {
-        align-items: center;
-      }
-    }
-
-    @media (max-width: 550px) {
-      .top {
-        align-items: flex-start;
-      }
-
-      .ad-box {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .ad-box button {
-        width: 100%;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:linear-gradient(135deg,#1266f1,#18a6a6);color:white;padding:22px 18px 30px;border-radius:0 0 28px 28px}
+.top,.hero,main{max-width:900px;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:28px;font-weight:800}
+.tag{font-size:13px;opacity:.9}
+.hero{margin-top:28px}
+.hero h1{font-size:30px;margin:0 0 8px}
+.hero p{margin:0 0 20px}
+.search{background:white;padding:10px;border-radius:18px;display:flex;gap:8px;box-shadow:0 10px 30px #0002}
+.search input{flex:1;border:0;outline:0;padding:13px;font-size:15px;min-width:0}
+button{border:0;border-radius:13px;padding:12px 16px;font-weight:700;cursor:pointer}
+.primary{background:#1266f1;color:white}
+.white{background:white;color:#1266f1}
+main{padding:0 16px;margin-top:24px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+.section-title h2{margin:0;font-size:20px}
+.hint{color:#687386;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:white;border:1px solid #e6eaf0;border-radius:18px;padding:17px;text-align:right;box-shadow:0 5px 18px #1720330b}
+.icon{font-size:28px}
+.card b{display:block;margin:8px 0 4px}
+.card span{color:#718096;font-size:12px}
+.ad-box{margin:24px 0;background:linear-gradient(135deg,#fff,#eef7ff);border:1px solid #dcecff;border-radius:20px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.ad-icon{font-size:30px}
+.ad-box h3{margin:5px 0}
+.ad-box p{margin:0;color:#687386;font-size:13px}
+.cta{margin:24px 0;background:#172033;color:white;border-radius:20px;padding:20px}
+.cta h3{margin:0 0 7px}
+.cta p{margin:0 0 14px;color:#d7deea;font-size:13px}
+footer{text-align:center;color:#778196;padding:25px 10px;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;padding:18px;align-items:flex-end;justify-content:center}
+.modal.open{display:flex}
+.box{background:white;width:min(560px,100%);border-radius:24px;padding:20px;max-height:92vh;overflow:auto}
+.box-head{display:flex;justify-content:space-between;align-items:center}
+.close{background:#eef1f5;color:#333}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #d9dfe8;border-radius:12px;font:inherit;outline:0}
+textarea{min-height:100px;resize:vertical}
+.notice{background:#eef7ff;color:#1457a6;padding:11px;border-radius:12px;font-size:12px;margin-top:12px}
+.payment-info{background:#f0f8ff;color:#1457a6;padding:12px;border-radius:12px;margin-top:8px;font-size:13px;line-height:1.9;word-break:break-word}
+.address{font-family:monospace;direction:ltr;display:block;margin-top:5px}
+.preferred{border:2px solid #18a6a6;background:#effffc}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.modal{align-items:center}}
+@media(max-width:550px){.top{align-items:flex-start}.ad-box{flex-direction:column;align-items:stretch}.ad-box button{width:100%}}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="top">
-    <div>
-      <div class="logo">خِدْمَتي</div>
-      <div class="tag">اطلبها… بتوصلك</div>
-    </div>
+<div class="top">
+<div>
+<div class="logo">خِدْمَتي</div>
+<div class="tag">اطلبها… بتوصلك</div>
+</div>
 
-    <button class="white" onclick="openModal('provider')">
-      سجّل كمقدّم خدمة
-    </button>
-  </div>
+<button class="white" onclick="openModal('provider')">
+سجّل كمقدّم خدمة
+</button>
+</div>
 
-  <div class="hero">
-    <h1>شو بدك؟</h1>
-    <p>اطلب الخدمة اللي بدك ياها من مقدّمي الخدمات القريبين منك.</p>
+<div class="hero">
+<h1>شو بدك؟</h1>
+<p>اطلب الخدمة اللي بدك ياها من مقدّمي الخدمات القريبين منك.</p>
 
-    <div class="search">
-      <input id="search" placeholder="مثلاً: بدي كهربائي يصلّح قاطع">
-      <button class="primary" onclick="searchService()">بحث</button>
-    </div>
-  </div>
+<div class="search">
+<input id="search" placeholder="مثلاً: بدي كهربائي يصلّح قاطع">
+<button class="primary" onclick="searchService()">بحث</button>
+</div>
+</div>
 </header>
 
 <main>
 
-  <div class="section-title">
-    <h2>الخدمات</h2>
-    <span class="hint">نبدأ من اللاذقية</span>
-  </div>
+<div class="section-title">
+<h2>الخدمات</h2>
+<span class="hint">كل سوريا 🇸🇾</span>
+</div>
 
-  <div class="grid" id="services"></div>
+<div class="grid" id="services"></div>
 
-  <section class="ad-box">
-    <div>
-      <div class="ad-icon">📢</div>
-      <h3>عندك محل أو مشروع؟</h3>
-      <p>
-        خلّي إعلانك يظهر لزوار خِدْمَتي ووصّل خدماتك لزبائن جدد.
-      </p>
-    </div>
+<section class="ad-box">
+<div>
+<div class="ad-icon">📢</div>
+<h3>عندك محل أو مشروع؟</h3>
+<p>خلّي إعلانك يظهر لزوار خِدْمَتي ووصّل خدماتك لزبائن جدد.</p>
+</div>
+<button class="primary" onclick="openModal('ad')">أعلن معنا</button>
+</section>
 
-    <button class="primary" onclick="openModal('ad')">
-      أعلن معنا
-    </button>
-  </section>
-
-  <section class="cta">
-    <h3>ما لقيت اللي بدك ياه؟</h3>
-    <p>
-      اكتب طلبك وسنضيفه ضمن الخدمات المطلوبة في منطقتك.
-    </p>
-
-    <button class="primary" onclick="openModal('request')">
-      اطلب خدمة الآن
-    </button>
-  </section>
+<section class="cta">
+<h3>ما لقيت اللي بدك ياه؟</h3>
+<p>اكتب طلبك وسنضيفه ضمن الخدمات المطلوبة في منطقتك.</p>
+<button class="primary" onclick="openModal('request')">اطلب خدمة الآن</button>
+</section>
 
 </main>
 
 <footer>
-  خِدْمَتي © 2026 — منصة خدمات محلية تبدأ من اللاذقية
+خِدْمَتي © 2026 — منصة خدمات محلية تبدأ من سوريا 🇸🇾
 </footer>
 
-
 <div class="modal" id="modal">
+<div class="box">
 
-  <div class="box">
-
-    <div class="box-head">
-      <h2 id="modalTitle">طلب خدمة</h2>
-      <button class="close" onclick="closeModal()">إغلاق</button>
-    </div>
-
-    <form id="form" onsubmit="submitForm(event)">
-
-      <div id="normalService">
-
-        <label>الخدمة</label>
-        <select id="service"></select>
-
-      </div>
-
-
-      <div id="providerFields" style="display:none">
-
-        <label>اسم مقدّم الخدمة</label>
-        <input id="providerName" placeholder="اسمك">
-
-        <label>اختصاصك</label>
-        <input id="providerJob" placeholder="مثلاً: كهربائي، سباك، مصلّح موبايلات">
-
-      </div>
-
-
-      <div id="adFields" style="display:none">
-
-        <label>اسم المحل أو المشروع</label>
-        <input id="adName" placeholder="مثلاً: محل حيدر للموبايلات">
-
-        <label>نوع الإعلان</label>
-
-        <select id="adType">
-          <option>إعلان عادي</option>
-          <option>إعلان مميز</option>
-          <option>إعلان لمدة شهر</option>
-        </select>
-
-      </div>
-
-
-      <label>المنطقة</label>
-      <input id="area" placeholder="مثلاً: الرمل، الزراعة، المشروع...">
-
-
-      <label>وصف الطلب</label>
-      <textarea
-        id="details"
-        placeholder="اشرح لنا شو المشكلة أو شو الخدمة المطلوبة"
-      ></textarea>
-
-
-      <label>رقم للتواصل</label>
-      <input
-        id="phone"
-        type="tel"
-        placeholder="رقم الهاتف أو واتساب"
-      >
-
-
-      <div class="notice" id="notice">
-        هذه نسخة تجريبية. حالياً يتم تسجيل الطلب على الجهاز فقط.
-      </div>
-
-
-      <button
-        class="primary"
-        style="width:100%;margin-top:15px"
-        type="submit"
-      >
-        إرسال الطلب
-      </button>
-
-    </form>
-
-  </div>
+<div class="box-head">
+<h2 id="modalTitle">طلب خدمة</h2>
+<button class="close" onclick="closeModal()">إغلاق</button>
 </div>
 
+<form id="form" onsubmit="submitForm(event)">
+
+<div id="normalService">
+<label>الخدمة</label>
+<select id="service"></select>
+</div>
+
+<div id="providerFields" style="display:none">
+
+<label>اسم مقدّم الخدمة</label>
+<input id="providerName" placeholder="اسمك">
+
+<label>اختصاصك</label>
+<input id="providerJob" placeholder="مثلاً: كهربائي، سباك، مصلّح موبايلات">
+
+</div>
+
+<div id="adFields" style="display:none">
+
+<label>اسم المحل أو المشروع</label>
+<input id="adName" placeholder="مثلاً: محل حيدر للموبايلات">
+
+<label>نوع الإعلان</label>
+<select id="adType">
+<option>إعلان عادي</option>
+<option>إعلان مميز</option>
+<option>إعلان لمدة شهر</option>
+</select>
+
+</div>
+
+<label>المحافظة</label>
+<select id="governorate">
+<option>دمشق</option>
+<option>ريف دمشق</option>
+<option>حلب</option>
+<option>حمص</option>
+<option>حماة</option>
+<option>اللاذقية</option>
+<option>طرطوس</option>
+<option>إدلب</option>
+<option>الرقة</option>
+<option>دير الزور</option>
+<option>الحسكة</option>
+<option>درعا</option>
+<option>السويداء</option>
+<option>القنيطرة</option>
+</select>
+
+<label>المنطقة</label>
+<input id="area" placeholder="مثلاً: الرمل، الزراعة، المشروع...">
+
+<label>وصف الطلب</label>
+<textarea id="details" placeholder="اشرح لنا شو المشكلة أو شو الخدمة المطلوبة"></textarea>
+
+<label>رقم للتواصل</label>
+<input id="phone" type="tel" placeholder="رقم الهاتف أو واتساب">
+
+<div id="paymentFields">
+
+<label>💳 طريقة الدفع</label>
+
+<select id="payment" onchange="showPaymentInfo()">
+<option value="shamcash">⭐ شام كاش — يُفضّل الدفع عبر شام كاش</option>
+<option value="balance">📞 رصيد عادي</option>
+<option value="binance">🪙 USDT عبر Binance</option>
+<option value="cash">💵 دفع نقدي</option>
+</select>
+
+<div id="paymentInfo" class="payment-info"></div>
+
+</div>
+
+<div class="notice" id="notice">
+⭐ يُفضّل الدفع عبر شام كاش.
+</div>
+
+<button class="primary" style="width:100%;margin-top:15px" type="submit">
+إرسال الطلب
+</button>
+
+</form>
+</div>
+</div>
 
 <script>
 
-const services = [
-  ["🔧", "صيانة منزلية", "كهرباء، سباكة، تمديدات"],
-  ["📱", "موبايلات وكمبيوتر", "صيانة وبرمجة وأجهزة"],
-  ["🚗", "سيارات", "ميكانيك، كهرباء، خدمات"],
-  ["🏠", "منزل", "تنظيف، دهان، نقل أثاث"],
-  ["📚", "دروس خصوصية", "مدرسين لمختلف المواد"],
-  ["🚚", "نقل وتوصيل", "نقل أغراض وطلبات"],
-  ["💄", "تجميل وعناية", "حلاقين، صالونات، مكياج"],
-  ["📸", "تصوير ومناسبات", "تصوير، فيديو، مناسبات"],
-  ["💻", "خدمات رقمية", "تصميم، ترجمة، مونتاج"],
-  ["🛒", "شراء وتوصيل", "طلبات من المحلات للبيت"]
+const services=[
+["🔧","صيانة منزلية","كهرباء، سباكة، تمديدات"],
+["📱","موبايلات وكمبيوتر","صيانة وبرمجة وأجهزة"],
+["🚗","سيارات","ميكانيك، كهرباء، خدمات"],
+["🏠","منزل","تنظيف، دهان، نقل أثاث"],
+["📚","دروس خصوصية","مدرسين لمختلف المواد"],
+["🚚","نقل وتوصيل","نقل أغراض وطلبات"],
+["💄","تجميل وعناية","حلاقين، صالونات، مكياج"],
+["📸","تصوير ومناسبات","تصوير، فيديو، مناسبات"],
+["💻","خدمات رقمية","تصميم، ترجمة، مونتاج"],
+["🛒","شراء وتوصيل","طلبات من المحلات للبيت"]
 ];
 
+const grid=document.getElementById("services");
+const select=document.getElementById("service");
 
-const grid = document.getElementById("services");
-const select = document.getElementById("service");
+services.forEach(function(s,i){
 
+grid.innerHTML+=`
+<button class="card" onclick="openModal('request',${i})">
+<div class="icon">${s[0]}</div>
+<b>${s[1]}</b>
+<span>${s[2]}</span>
+</button>`;
 
-services.forEach(function(s, i) {
-
-  grid.innerHTML += `
-    <button class="card" onclick="openModal('request', ${i})">
-      <div class="icon">${s[0]}</div>
-      <b>${s[1]}</b>
-      <span>${s[2]}</span>
-    </button>
-  `;
-
-  select.innerHTML += `
-    <option value="${i}">${s[1]}</option>
-  `;
+select.innerHTML+=`
+<option value="${i}">${s[1]}</option>`;
 
 });
 
+function openModal(type,index){
 
-function openModal(type, index) {
+document.getElementById("modal").classList.add("open");
 
-  document.getElementById("modal").classList.add("open");
+document.getElementById("normalService").style.display="none";
+document.getElementById("providerFields").style.display="none";
+document.getElementById("adFields").style.display="none";
+document.getElementById("paymentFields").style.display="none";
 
-  const normalService =
-    document.getElementById("normalService");
+if(type==="provider"){
 
-  const adFields =
-    document.getElementById("adFields");
+document.getElementById("modalTitle").textContent="تسجيل مقدّم خدمة";
+document.getElementById("providerFields").style.display="block";
 
-  const providerFields =
-    document.getElementById("providerFields");
-
-  const notice =
-    document.getElementById("notice");
-
-
-  normalService.style.display = "none";
-  adFields.style.display = "none";
-  providerFields.style.display = "none";
-
-
-  if (type === "provider") {
-
-    document.getElementById("modalTitle").textContent =
-      "تسجيل مقدّم خدمة";
-
-    providerFields.style.display = "block";
-
-    notice.textContent =
-      "سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
-
-  }
-
-  else if (type === "ad") {
-
-    document.getElementById("modalTitle").textContent =
-      "📢 طلب إعلان";
-
-    adFields.style.display = "block";
-
-    notice.textContent =
-      "أرسل طلب الإعلان وسنتواصل معك لتحديد السعر وطريقة الدفع.";
-
-  }
-
-  else {
-
-    document.getElementById("modalTitle").textContent =
-      "طلب خدمة";
-
-    normalService.style.display = "block";
-
-    notice.textContent =
-      "هذه نسخة تجريبية. حالياً يتم تسجيل الطلب على الجهاز فقط.";
-
-    if (index !== undefined) {
-      document.getElementById("service").value = index;
-    }
-
-  }
+document.getElementById("notice").textContent=
+"سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
 
 }
 
+else if(type==="ad"){
 
-function closeModal() {
+document.getElementById("modalTitle").textContent="📢 طلب إعلان";
+document.getElementById("adFields").style.display="block";
 
-  document
-    .getElementById("modal")
-    .classList.remove("open");
-
-}
-
-
-function searchService() {
-
-  const q =
-    document.getElementById("search").value.trim();
-
-  if (!q) {
-
-    openModal("request");
-
-    return;
-
-  }
-
-  document.getElementById("details").value = q;
-
-  openModal("request");
+document.getElementById("notice").textContent=
+"أرسل طلب الإعلان وسنتواصل معك لتحديد السعر وطريقة الدفع.";
 
 }
 
+else{
 
-function submitForm(e) {
+document.getElementById("modalTitle").textContent="طلب خدمة";
+document.getElementById("normalService").style.display="block";
+document.getElementById("paymentFields").style.display="block";
 
-  e.preventDefault();
+if(index!==undefined){
+document.getElementById("service").value=index;
+}
 
-  const title =
-    document.getElementById("modalTitle").textContent;
+showPaymentInfo();
 
+}
 
-  if (title.includes("إعلان")) {
+}
 
-    const name =
-      document.getElementById("adName").value.trim();
+function showPaymentInfo(){
 
-    const phone =
-      document.getElementById("phone").value.trim();
+const payment=document.getElementById("payment").value;
+const info=document.getElementById("paymentInfo");
 
-    const type =
-      document.getElementById("adType").value;
+if(payment==="shamcash"){
 
+info.innerHTML=
+"⭐ <b>شام كاش — طريقة الدفع المفضّلة</b><br>"+
+"معرّف الاستلام:<br>"+
+"<span class='address'>1082480122968790</span><br>"+
+"تأكد من بيانات المستلم قبل التحويل.";
 
-    if (!name || !phone) {
+document.getElementById("notice").textContent=
+"⭐ يُفضّل الدفع عبر شام كاش.";
 
-      alert("رجاءً اكتب اسم المحل ورقم التواصل.");
+}
 
-      return;
+else if(payment==="balance"){
 
-    }
+info.innerHTML=
+"📞 <b>رصيد عادي</b><br>"+
+"رقم التحويل:<br>"+
+"<span class='address'>0995241394</span><br>"+
+"تأكد من الرقم قبل إرسال الرصيد.";
 
+document.getElementById("notice").textContent=
+"تأكد من الرقم قبل إرسال الرصيد.";
 
-    alert(
-      "تم تسجيل طلب الإعلان 📢\n\n" +
-      "المحل: " + name + "\n" +
-      "نوع الإعلان: " + type + "\n" +
-      "رقم التواصل: " + phone
-    );
+}
 
-  }
+else if(payment==="binance"){
 
+info.innerHTML=
+"🪙 <b>USDT عبر Binance</b><br>"+
+"الشبكة: <b>BNB Smart Chain (BEP20)</b><br>"+
+"عنوان الاستلام:<br>"+
+"<span class='address'>0xD7e44A1e6D6837dFa316F6E673adeE86baf25775</span><br>"+
+"⚠️ أرسل USDT على شبكة BNB Smart Chain فقط.";
 
-  else if (title.includes("مقدّم")) {
+document.getElementById("notice").textContent=
+"⚠️ تأكد من العملة والشبكة والعنوان قبل التحويل.";
 
-    const name =
-      document.getElementById("providerName").value.trim();
+}
 
-    const job =
-      document.getElementById("providerJob").value.trim();
+else{
 
-    const phone =
-      document.getElementById("phone").value.trim();
+info.innerHTML=
+"💵 <b>دفع نقدي</b><br>"+
+"يتم الدفع لمقدّم الخدمة حسب الاتفاق.";
 
+document.getElementById("notice").textContent=
+"يتم الدفع نقداً حسب الاتفاق مع مقدّم الخدمة.";
 
-    if (!name || !job || !phone) {
+}
 
-      alert("رجاءً أكمل الاسم والاختصاص ورقم التواصل.");
+}
 
-      return;
+function closeModal(){
+document.getElementById("modal").classList.remove("open");
+}
 
-    }
+function searchService(){
 
+const q=document.getElementById("search").value.trim();
 
-    alert(
-      "تم تسجيل طلبك كمقدّم خدمة ❤️\n\n" +
-      "الاسم: " + name + "\n" +
-      "الاختصاص: " + job + "\n" +
-      "رقم التواصل: " + phone
-    );
+if(!q){
+openModal("request");
+return;
+}
 
-  }
+document.getElementById("details").value=q;
+openModal("request");
 
+}
 
-  else {
+function submitForm(e){
 
-    alert(
-      "تم تسجيل طلب الخدمة تجريبياً ❤️"
-    );
+e.preventDefault();
 
-  }
+const title=document.getElementById("modalTitle").textContent;
 
+if(title.includes("إعلان")){
 
-  e.target.reset();
+const name=document.getElementById("adName").value.trim();
+const phone=document.getElementById("phone").value.trim();
 
-  closeModal();
+if(!name||!phone){
+alert("رجاءً اكتب اسم المحل ورقم التواصل.");
+return;
+}
+
+alert(
+"تم تسجيل طلب الإعلان 📢\n\n"+
+"المحل: "+name+"\n"+
+"رقم التواصل: "+phone
+);
+
+}
+
+else if(title.includes("مقدّم")){
+
+const name=document.getElementById("providerName").value.trim();
+const job=document.getElementById("providerJob").value.trim();
+const phone=document.getElementById("phone").value.trim();
+
+if(!name||!job||!phone){
+alert("رجاءً أكمل الاسم والاختصاص ورقم التواصل.");
+return;
+}
+
+alert(
+"تم تسجيل طلبك كمقدّم خدمة ❤️\n\n"+
+"الاسم: "+name+"\n"+
+"الاختصاص: "+job+"\n"+
+"رقم التواصل: "+phone
+);
+
+}
+
+else{
+
+const service=document.getElementById("service").selectedOptions[0].text;
+const governorate=document.getElementById("governorate").value;
+const area=document.getElementById("area").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const payment=document.getElementById("payment").selectedOptions[0].text;
+
+if(!area||!phone){
+
+alert("رجاءً اكتب المنطقة ورقم التواصل.");
+return;
+
+}
+
+alert(
+"تم تسجيل طلب الخدمة ❤️\n\n"+
+"الخدمة: "+service+"\n"+
+"المحافظة: "+governorate+"\n"+
+"المنطقة: "+area+"\n"+
+"طريقة الدفع: "+payment+"\n"+
+"رقم التواصل: "+phone
+);
+
+}
+
+e.target.reset();
+closeModal();
 
 }
 
