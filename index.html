@@ -50,7 +50,6 @@ textarea{min-height:100px;resize:vertical}
 .notice{background:#eef7ff;color:#1457a6;padding:11px;border-radius:12px;font-size:12px;margin-top:12px}
 .payment-info{background:#f0f8ff;color:#1457a6;padding:12px;border-radius:12px;margin-top:8px;font-size:13px;line-height:1.9;word-break:break-word}
 .address{font-family:monospace;direction:ltr;display:block;margin-top:5px}
-.preferred{border:2px solid #18a6a6;background:#effffc}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.modal{align-items:center}}
 @media(max-width:550px){.top{align-items:flex-start}.ad-box{flex-direction:column;align-items:stretch}.ad-box button{width:100%}}
 </style>
@@ -64,16 +63,12 @@ textarea{min-height:100px;resize:vertical}
 <div class="logo">خِدْمَتي</div>
 <div class="tag">اطلبها… بتوصلك</div>
 </div>
-
-<button class="white" onclick="openModal('provider')">
-سجّل كمقدّم خدمة
-</button>
+<button class="white" onclick="openModal('provider')">سجّل كمقدّم خدمة</button>
 </div>
 
 <div class="hero">
 <h1>شو بدك؟</h1>
 <p>اطلب الخدمة اللي بدك ياها من مقدّمي الخدمات القريبين منك.</p>
-
 <div class="search">
 <input id="search" placeholder="مثلاً: بدي كهربائي يصلّح قاطع">
 <button class="primary" onclick="searchService()">بحث</button>
@@ -127,17 +122,14 @@ textarea{min-height:100px;resize:vertical}
 </div>
 
 <div id="providerFields" style="display:none">
-
 <label>اسم مقدّم الخدمة</label>
 <input id="providerName" placeholder="اسمك">
 
 <label>اختصاصك</label>
 <input id="providerJob" placeholder="مثلاً: كهربائي، سباك، مصلّح موبايلات">
-
 </div>
 
 <div id="adFields" style="display:none">
-
 <label>اسم المحل أو المشروع</label>
 <input id="adName" placeholder="مثلاً: محل حيدر للموبايلات">
 
@@ -147,7 +139,6 @@ textarea{min-height:100px;resize:vertical}
 <option>إعلان مميز</option>
 <option>إعلان لمدة شهر</option>
 </select>
-
 </div>
 
 <label>المحافظة</label>
@@ -178,18 +169,16 @@ textarea{min-height:100px;resize:vertical}
 <input id="phone" type="tel" placeholder="رقم الهاتف أو واتساب">
 
 <div id="paymentFields">
-
 <label>💳 طريقة الدفع</label>
 
 <select id="payment" onchange="showPaymentInfo()">
-<option value="shamcash">⭐ شام كاش — يُفضّل الدفع عبر شام كاش</option>
+<option value="shamcash">⭐ شام كاش</option>
 <option value="balance">📞 رصيد عادي</option>
 <option value="binance">🪙 USDT عبر Binance</option>
 <option value="cash">💵 دفع نقدي</option>
 </select>
 
 <div id="paymentInfo" class="payment-info"></div>
-
 </div>
 
 <div class="notice" id="notice">
@@ -205,6 +194,9 @@ textarea{min-height:100px;resize:vertical}
 </div>
 
 <script>
+
+const SUPABASE_URL="https://yqlsnbhuwduqypeqnssk.supabase.co";
+const SUPABASE_KEY="sb_publishable_PvAR6EDs9bzpru68ZDWanA__T0S3u3X";
 
 const services=[
 ["🔧","صيانة منزلية","كهرباء، سباكة، تمديدات"],
@@ -222,22 +214,17 @@ const services=[
 const grid=document.getElementById("services");
 const select=document.getElementById("service");
 
-services.forEach(function(s,i){
-
+services.forEach((s,i)=>{
 grid.innerHTML+=`
 <button class="card" onclick="openModal('request',${i})">
 <div class="icon">${s[0]}</div>
 <b>${s[1]}</b>
 <span>${s[2]}</span>
 </button>`;
-
-select.innerHTML+=`
-<option value="${i}">${s[1]}</option>`;
-
+select.innerHTML+=`<option value="${i}">${s[1]}</option>`;
 });
 
 function openModal(type,index){
-
 document.getElementById("modal").classList.add("open");
 
 document.getElementById("normalService").style.display="none";
@@ -246,39 +233,22 @@ document.getElementById("adFields").style.display="none";
 document.getElementById("paymentFields").style.display="none";
 
 if(type==="provider"){
-
 document.getElementById("modalTitle").textContent="تسجيل مقدّم خدمة";
 document.getElementById("providerFields").style.display="block";
-
-document.getElementById("notice").textContent=
-"سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
-
+document.getElementById("notice").textContent="سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
 }
-
 else if(type==="ad"){
-
 document.getElementById("modalTitle").textContent="📢 طلب إعلان";
 document.getElementById("adFields").style.display="block";
-
-document.getElementById("notice").textContent=
-"أرسل طلب الإعلان وسنتواصل معك لتحديد السعر وطريقة الدفع.";
-
+document.getElementById("notice").textContent="أرسل طلب الإعلان وسنتواصل معك.";
 }
-
 else{
-
 document.getElementById("modalTitle").textContent="طلب خدمة";
 document.getElementById("normalService").style.display="block";
 document.getElementById("paymentFields").style.display="block";
-
-if(index!==undefined){
-document.getElementById("service").value=index;
-}
-
+if(index!==undefined) document.getElementById("service").value=index;
 showPaymentInfo();
-
 }
-
 }
 
 function showPaymentInfo(){
@@ -287,54 +257,16 @@ const payment=document.getElementById("payment").value;
 const info=document.getElementById("paymentInfo");
 
 if(payment==="shamcash"){
-
-info.innerHTML=
-"⭐ <b>شام كاش — طريقة الدفع المفضّلة</b><br>"+
-"معرّف الاستلام:<br>"+
-"<span class='address'>1082480122968790</span><br>"+
-"تأكد من بيانات المستلم قبل التحويل.";
-
-document.getElementById("notice").textContent=
-"⭐ يُفضّل الدفع عبر شام كاش.";
-
+info.innerHTML="⭐ <b>شام كاش</b><br>معرّف الاستلام:<br><span class='address'>1082480122968790</span>";
 }
-
 else if(payment==="balance"){
-
-info.innerHTML=
-"📞 <b>رصيد عادي</b><br>"+
-"رقم التحويل:<br>"+
-"<span class='address'>0995241394</span><br>"+
-"تأكد من الرقم قبل إرسال الرصيد.";
-
-document.getElementById("notice").textContent=
-"تأكد من الرقم قبل إرسال الرصيد.";
-
+info.innerHTML="📞 <b>رصيد عادي</b><br>رقم التحويل:<br><span class='address'>0995241394</span>";
 }
-
 else if(payment==="binance"){
-
-info.innerHTML=
-"🪙 <b>USDT عبر Binance</b><br>"+
-"الشبكة: <b>BNB Smart Chain (BEP20)</b><br>"+
-"عنوان الاستلام:<br>"+
-"<span class='address'>0xD7e44A1e6D6837dFa316F6E673adeE86baf25775</span><br>"+
-"⚠️ أرسل USDT على شبكة BNB Smart Chain فقط.";
-
-document.getElementById("notice").textContent=
-"⚠️ تأكد من العملة والشبكة والعنوان قبل التحويل.";
-
+info.innerHTML="🪙 <b>USDT عبر Binance</b><br>الشبكة: BNB Smart Chain (BEP20)<br>العنوان:<br><span class='address'>0xD7e44A1e6D6837dFa316F6E673adeE86baf25775</span>";
 }
-
 else{
-
-info.innerHTML=
-"💵 <b>دفع نقدي</b><br>"+
-"يتم الدفع لمقدّم الخدمة حسب الاتفاق.";
-
-document.getElementById("notice").textContent=
-"يتم الدفع نقداً حسب الاتفاق مع مقدّم الخدمة.";
-
+info.innerHTML="💵 <b>دفع نقدي</b><br>الدفع لمقدّم الخدمة حسب الاتفاق.";
 }
 
 }
@@ -344,24 +276,43 @@ document.getElementById("modal").classList.remove("open");
 }
 
 function searchService(){
-
 const q=document.getElementById("search").value.trim();
-
-if(!q){
-openModal("request");
-return;
-}
-
+if(!q){openModal("request");return;}
 document.getElementById("details").value=q;
 openModal("request");
+}
+
+async function saveRequest(data){
+
+const response=await fetch(
+SUPABASE_URL+"/rest/v1/service_requests",
+{
+method:"POST",
+headers:{
+"apikey":SUPABASE_KEY,
+"Authorization":"Bearer "+SUPABASE_KEY,
+"Content-Type":"application/json",
+"Prefer":"return=minimal"
+},
+body:JSON.stringify(data)
+}
+);
+
+if(!response.ok){
+const error=await response.text();
+console.error(error);
+throw new Error(error);
+}
 
 }
 
-function submitForm(e){
+async function submitForm(e){
 
 e.preventDefault();
 
 const title=document.getElementById("modalTitle").textContent;
+
+try{
 
 if(title.includes("إعلان")){
 
@@ -373,11 +324,16 @@ alert("رجاءً اكتب اسم المحل ورقم التواصل.");
 return;
 }
 
-alert(
-"تم تسجيل طلب الإعلان 📢\n\n"+
-"المحل: "+name+"\n"+
-"رقم التواصل: "+phone
-);
+await saveRequest({
+customer_name:name,
+phone:phone,
+service:"إعلان",
+details:"نوع الإعلان: "+document.getElementById("adType").value,
+payment_method:"غير محدد",
+status:"طلب إعلان"
+});
+
+alert("تم تسجيل طلب الإعلان بنجاح 📢");
 
 }
 
@@ -392,12 +348,16 @@ alert("رجاءً أكمل الاسم والاختصاص ورقم التواصل
 return;
 }
 
-alert(
-"تم تسجيل طلبك كمقدّم خدمة ❤️\n\n"+
-"الاسم: "+name+"\n"+
-"الاختصاص: "+job+"\n"+
-"رقم التواصل: "+phone
-);
+await saveRequest({
+customer_name:name,
+phone:phone,
+service:"مقدّم خدمة",
+details:"الاختصاص: "+job,
+payment_method:"غير محدد",
+status:"مقدّم خدمة"
+});
+
+alert("تم تسجيلك كمقدّم خدمة ❤️");
 
 }
 
@@ -407,32 +367,41 @@ const service=document.getElementById("service").selectedOptions[0].text;
 const governorate=document.getElementById("governorate").value;
 const area=document.getElementById("area").value.trim();
 const phone=document.getElementById("phone").value.trim();
+const details=document.getElementById("details").value.trim();
 const payment=document.getElementById("payment").selectedOptions[0].text;
 
 if(!area||!phone){
-
 alert("رجاءً اكتب المنطقة ورقم التواصل.");
 return;
-
 }
 
-alert(
-"تم تسجيل طلب الخدمة ❤️\n\n"+
-"الخدمة: "+service+"\n"+
-"المحافظة: "+governorate+"\n"+
-"المنطقة: "+area+"\n"+
-"طريقة الدفع: "+payment+"\n"+
-"رقم التواصل: "+phone
-);
+await saveRequest({
+customer_name:"زبون",
+phone:phone,
+service:service,
+details:"المحافظة: "+governorate+"\nالمنطقة: "+area+"\nالتفاصيل: "+details,
+payment_method:payment,
+status:"جديد"
+});
+
+alert("تم إرسال طلب الخدمة وحفظه بنجاح ❤️");
 
 }
 
 e.target.reset();
 closeModal();
 
+}catch(error){
+
+alert("حدث خطأ أثناء حفظ الطلب. تأكد من إعدادات Supabase.");
+
+console.error(error);
+
+}
+
 }
 
 </script>
 
 </body>
-</html>
+  </html>
