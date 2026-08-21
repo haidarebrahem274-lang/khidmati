@@ -3,25 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>إدارة خِدْمَتي</title>
 
 <style>
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   font-family:Tahoma,Arial,sans-serif;
   background:#f5f7fb;
   color:#172033;
 }
+
 header{
   background:linear-gradient(135deg,#1266f1,#18a6a6);
   color:white;
   padding:25px 18px;
+  box-shadow:0 4px 15px #0002;
 }
+
+header h1{
+  margin:0 0 8px;
+  font-size:25px;
+}
+
+header p{
+  margin:0;
+  opacity:.9;
+}
+
 main{
   max-width:1000px;
   margin:auto;
   padding:20px 15px;
 }
+
 .box{
   background:white;
   border-radius:18px;
@@ -29,6 +49,7 @@ main{
   margin-bottom:20px;
   box-shadow:0 5px 20px #0001;
 }
+
 input,button{
   width:100%;
   padding:13px;
@@ -37,58 +58,233 @@ input,button{
   border:1px solid #ddd;
   font:inherit;
 }
+
 button{
   background:#1266f1;
   color:white;
   border:0;
   font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
 }
+
+button:hover{
+  opacity:.9;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .logout{
   background:#e53935;
 }
-.order{
-  border:1px solid #e2e6ed;
-  border-radius:15px;
-  padding:15px;
-  margin-top:12px;
+
+.refresh{
+  background:#18a6a6;
 }
-.status{
-  font-weight:bold;
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.stat{
+  background:#f5f7fb;
+  border-radius:14px;
+  padding:15px 8px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  margin-bottom:5px;
+}
+
+.stat span{
+  font-size:12px;
+  color:#687386;
+}
+
+.order{
+  background:white;
+  border:1px solid #e2e6ed;
+  border-radius:18px;
+  padding:18px;
+  margin-top:15px;
+  box-shadow:0 4px 15px #0000000b;
+}
+
+.order h3{
+  margin-top:0;
   color:#1266f1;
 }
+
 .small{
   color:#687386;
-  font-size:13px;
-  line-height:1.8;
+  font-size:14px;
+  line-height:2;
 }
+
+.status{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:20px;
+  font-weight:bold;
+  margin-top:3px;
+}
+
+.status-new{
+  background:#fff3cd;
+  color:#856404;
+}
+
+.status-accepted{
+  background:#d4edda;
+  color:#155724;
+}
+
+.status-progress{
+  background:#cce5ff;
+  color:#004085;
+}
+
+.status-completed{
+  background:#d1f2eb;
+  color:#0b5345;
+}
+
+.status-rejected{
+  background:#f8d7da;
+  color:#721c24;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  margin-top:15px;
+}
+
+.actions button{
+  margin-top:0;
+  font-size:13px;
+}
+
+.accept{
+  background:#28a745;
+}
+
+.progress{
+  background:#007bff;
+}
+
+.complete{
+  background:#009688;
+}
+
+.reject{
+  background:#dc3545;
+}
+
+.delete{
+  background:#6c757d;
+}
+
+.call{
+  background:#17a2b8;
+}
+
+.copy{
+  background:#7952b3;
+}
+
+.message{
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+  font-weight:bold;
+}
+
+.success{
+  background:#d4edda;
+  color:#155724;
+}
+
+.error{
+  background:#f8d7da;
+  color:#721c24;
+}
+
 .hidden{
   display:none;
 }
+
+.empty{
+  text-align:center;
+  color:#687386;
+}
+
+@media(max-width:600px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .actions{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <h1>🛠️ إدارة خِدْمَتي</h1>
+
 <p>لوحة إدارة طلبات الخدمات</p>
+
 </header>
 
 <main>
+
+<!-- تسجيل الدخول -->
 
 <div id="loginBox" class="box">
 
 <h2>🔐 دخول الإدارة</h2>
 
-<input id="email" type="email" placeholder="البريد الإلكتروني">
+<input
+id="email"
+type="email"
+placeholder="البريد الإلكتروني"
+>
 
-<input id="password" type="password" placeholder="كلمة المرور">
+<input
+id="password"
+type="password"
+placeholder="كلمة المرور"
+>
 
-<button onclick="login()">دخول</button>
+<button onclick="login()">
+دخول
+</button>
 
 <p id="loginMessage" class="small"></p>
 
 </div>
+
+
+<!-- لوحة الإدارة -->
 
 <div id="adminBox" class="hidden">
 
@@ -96,11 +292,49 @@ button{
 
 <h2>📋 طلبات الخدمة</h2>
 
-<button onclick="loadOrders()">🔄 تحديث الطلبات</button>
+<button
+class="refresh"
+onclick="loadOrders()"
+>
+🔄 تحديث الطلبات
+</button>
 
-<button class="logout" onclick="logout()">تسجيل الخروج</button>
+<button
+class="logout"
+onclick="logout()"
+>
+🚪 تسجيل الخروج
+</button>
+
+
+<!-- الإحصائيات -->
+
+<div class="stats">
+
+<div class="stat">
+<strong id="totalCount">0</strong>
+<span>إجمالي الطلبات</span>
+</div>
+
+<div class="stat">
+<strong id="newCount">0</strong>
+<span>طلبات جديدة</span>
+</div>
+
+<div class="stat">
+<strong id="progressCount">0</strong>
+<span>قيد التنفيذ</span>
+</div>
+
+<div class="stat">
+<strong id="completedCount">0</strong>
+<span>مكتملة</span>
+</div>
 
 </div>
+
+</div>
+
 
 <div id="orders"></div>
 
@@ -108,10 +342,18 @@ button{
 
 </main>
 
+
 <script type="module">
 
-import { createClient } from
+import {
+  createClient
+} from
 "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://yqlsnbhuwduqypeqnssk.supabase.co";
@@ -120,46 +362,90 @@ const SUPABASE_KEY =
 "sb_publishable_PvAR6EDs9bzpru68ZDWanA__T0S3u3X";
 
 const supabase =
-createClient(SUPABASE_URL,SUPABASE_KEY);
+createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =========================
+   LOGIN
+========================= */
 
 window.login = async function(){
 
 const email =
-document.getElementById("email").value.trim();
+document
+.getElementById("email")
+.value
+.trim();
 
 const password =
-document.getElementById("password").value;
+document
+.getElementById("password")
+.value;
 
 const message =
-document.getElementById("loginMessage");
+document
+.getElementById("loginMessage");
+
 
 if(!email || !password){
 
-message.textContent="اكتب البريد الإلكتروني وكلمة المرور.";
+message.textContent =
+"اكتب البريد الإلكتروني وكلمة المرور.";
+
 return;
 
 }
+
+
+message.textContent =
+"جاري تسجيل الدخول...";
+
 
 const {error} =
 await supabase.auth.signInWithPassword({
+
 email:email,
+
 password:password
+
 });
+
 
 if(error){
 
-message.textContent="بيانات الدخول غير صحيحة.";
+message.textContent =
+"❌ بيانات الدخول غير صحيحة.";
+
 console.error(error);
+
 return;
 
 }
 
-document.getElementById("loginBox").classList.add("hidden");
-document.getElementById("adminBox").classList.remove("hidden");
+
+document
+.getElementById("loginBox")
+.classList
+.add("hidden");
+
+
+document
+.getElementById("adminBox")
+.classList
+.remove("hidden");
+
 
 loadOrders();
 
 };
+
+
+/* =========================
+   LOGOUT
+========================= */
 
 window.logout = async function(){
 
@@ -169,84 +455,544 @@ location.reload();
 
 };
 
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
 window.loadOrders = async function(){
 
-const orders =
+const ordersBox =
 document.getElementById("orders");
 
-orders.innerHTML="<div class='box'>جاري تحميل الطلبات...</div>";
+ordersBox.innerHTML =
+`
+<div class="box">
+⏳ جاري تحميل الطلبات...
+</div>
+`;
+
 
 const {data,error} =
 await supabase
 .from("service_requests")
 .select("*")
-.order("created_at",{ascending:false});
+.order(
+  "created_at",
+  {
+    ascending:false
+  }
+);
+
 
 if(error){
 
-orders.innerHTML=
-"<div class='box'>حدث خطأ في تحميل الطلبات.</div>";
+ordersBox.innerHTML =
+`
+<div class="box error">
+❌ حدث خطأ في تحميل الطلبات.
+</div>
+`;
 
 console.error(error);
+
 return;
 
 }
+
 
 if(!data || data.length===0){
 
-orders.innerHTML=
-"<div class='box'>لا توجد طلبات حالياً.</div>";
+ordersBox.innerHTML =
+`
+<div class="box empty">
+📭 لا توجد طلبات حالياً.
+</div>
+`;
+
+updateStats([]);
 
 return;
 
 }
 
-orders.innerHTML="";
+
+updateStats(data);
+
+
+ordersBox.innerHTML="";
+
 
 data.forEach(order=>{
 
-const div=document.createElement("div");
+const div =
+document.createElement("div");
 
 div.className="order";
 
-div.innerHTML=`
 
-<h3>🆔 الطلب رقم ${order.id}</h3>
+const status =
+order.status || "جديد";
+
+
+const statusClass =
+getStatusClass(status);
+
+
+const date =
+formatDate(order.created_at);
+
+
+const phone =
+order.phone || "";
+
+
+div.innerHTML =
+`
+
+<h3>
+🆔 الطلب رقم ${escapeHtml(order.id)}
+</h3>
+
 
 <div class="small">
 
-<b>اسم العميل:</b>
-${order.customer_name || "-"}<br>
+<b>👤 اسم العميل:</b>
+${escapeHtml(order.customer_name || "-")}
+<br>
 
-<b>الهاتف:</b>
-${order.phone || "-"}<br>
 
-<b>الخدمة:</b>
-${order.service || "-"}<br>
+<b>📞 الهاتف:</b>
+${escapeHtml(phone || "-")}
+<br>
 
-<b>التفاصيل:</b>
-${(order.details || "-").replace(/\n/g,"<br>")}<br>
 
-<b>طريقة الدفع:</b>
-${order.payment_method || "-"}<br>
+<b>🛠️ الخدمة:</b>
+${escapeHtml(order.service || "-")}
+<br>
 
-<b>الحالة:</b>
-<span class="status">${order.status || "-"}</span><br>
 
-<b>التاريخ:</b>
-${order.created_at || "-"}
+<b>📍 التفاصيل:</b>
+${formatDetails(order.details)}
+<br>
+
+
+<b>💳 طريقة الدفع:</b>
+${escapeHtml(order.payment_method || "-")}
+<br>
+
+
+<b>📌 الحالة:</b>
+
+<span class="status ${statusClass}">
+${escapeHtml(status)}
+</span>
+
+<br>
+
+
+<b>🕐 التاريخ:</b>
+${escapeHtml(date)}
 
 </div>
 
+
+<div class="actions">
+
+
+<button
+class="accept"
+onclick="changeStatus(${order.id}, 'مقبول')"
+>
+🟢 قبول الطلب
+</button>
+
+
+<button
+class="progress"
+onclick="changeStatus(${order.id}, 'قيد التنفيذ')"
+>
+🟡 قيد التنفيذ
+</button>
+
+
+<button
+class="complete"
+onclick="changeStatus(${order.id}, 'مكتمل')"
+>
+🔵 مكتمل
+</button>
+
+
+<button
+class="reject"
+onclick="changeStatus(${order.id}, 'مرفوض')"
+>
+🔴 رفض الطلب
+</button>
+
+
+${
+phone
+?
+`
+<button
+class="call"
+onclick="callCustomer('${escapeJs(phone)}')"
+>
+📞 اتصال بالعميل
+</button>
+`
+:
+""
+}
+
+
+${
+phone
+?
+`
+<button
+class="copy"
+onclick="copyPhone('${escapeJs(phone)}')"
+>
+📋 نسخ الرقم
+</button>
+`
+:
+""
+}
+
+
+<button
+class="delete"
+onclick="deleteOrder(${order.id})"
+>
+🗑️ حذف الطلب
+</button>
+
+
+</div>
+
+
+<div
+id="message-${order.id}"
+class="message"
+></div>
+
 `;
 
-orders.appendChild(div);
+
+ordersBox.appendChild(div);
 
 });
 
 };
 
+
+/* =========================
+   CHANGE STATUS
+========================= */
+
+window.changeStatus =
+async function(id,newStatus){
+
+const message =
+document.getElementById(
+`message-${id}`
+);
+
+
+if(message){
+
+message.style.display="block";
+
+message.className =
+"message";
+
+message.textContent =
+"⏳ جاري تحديث الحالة...";
+
+}
+
+
+const {error} =
+await supabase
+.from("service_requests")
+.update({
+  status:newStatus
+})
+.eq("id",id);
+
+
+if(error){
+
+console.error(error);
+
+if(message){
+
+message.className =
+"message error";
+
+message.textContent =
+"❌ لم يتم تغيير الحالة.";
+
+}
+
+return;
+
+}
+
+
+if(message){
+
+message.className =
+"message success";
+
+message.textContent =
+"✅ تم تحديث حالة الطلب.";
+
+}
+
+
+setTimeout(
+loadOrders,
+500
+);
+
+};
+
+
+/* =========================
+   DELETE ORDER
+========================= */
+
+window.deleteOrder =
+async function(id){
+
+const confirmed =
+confirm(
+"⚠️ هل أنت متأكد أنك تريد حذف هذا الطلب نهائياً؟"
+);
+
+
+if(!confirmed){
+
+return;
+
+}
+
+
+const {error} =
+await supabase
+.from("service_requests")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+alert(
+"❌ لم يتم حذف الطلب."
+);
+
+console.error(error);
+
+return;
+
+}
+
+
+alert(
+"✅ تم حذف الطلب."
+);
+
+
+loadOrders();
+
+};
+
+
+/* =========================
+   CALL CUSTOMER
+========================= */
+
+window.callCustomer =
+function(phone){
+
+window.location.href =
+"tel:" + phone;
+
+};
+
+
+/* =========================
+   COPY PHONE
+========================= */
+
+window.copyPhone =
+async function(phone){
+
+try{
+
+await navigator.clipboard.writeText(phone);
+
+alert(
+"✅ تم نسخ رقم الهاتف."
+);
+
+}catch(error){
+
+alert(
+"📋 الرقم: " + phone
+);
+
+}
+
+};
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+function updateStats(data){
+
+document
+.getElementById("totalCount")
+.textContent =
+data.length;
+
+
+document
+.getElementById("newCount")
+.textContent =
+data.filter(
+o =>
+!o.status ||
+o.status==="جديد"
+).length;
+
+
+document
+.getElementById("progressCount")
+.textContent =
+data.filter(
+o =>
+o.status==="قيد التنفيذ"
+).length;
+
+
+document
+.getElementById("completedCount")
+.textContent =
+data.filter(
+o =>
+o.status==="مكتمل"
+).length;
+
+}
+
+
+/* =========================
+   STATUS COLORS
+========================= */
+
+function getStatusClass(status){
+
+if(status==="جديد")
+return "status-new";
+
+if(status==="مقبول")
+return "status-accepted";
+
+if(status==="قيد التنفيذ")
+return "status-progress";
+
+if(status==="مكتمل")
+return "status-completed";
+
+if(status==="مرفوض")
+return "status-rejected";
+
+return "status-new";
+
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function formatDate(date){
+
+if(!date)
+return "-";
+
+try{
+
+return new Date(date)
+.toLocaleString(
+"ar-SY",
+{
+dateStyle:"medium",
+timeStyle:"short"
+}
+);
+
+}catch{
+
+return date;
+
+}
+
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+function formatDetails(details){
+
+if(!details)
+return "-";
+
+return escapeHtml(details)
+.replace(
+/\n/g,
+"<br>"
+);
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHtml(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+return String(value)
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'")
+.replace(/"/g,'\\"');
+
+}
+
 </script>
 
 </body>
-</html>
+  </html>
