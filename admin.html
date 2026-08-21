@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدارة خِدْمَتي</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+header{
+  background:linear-gradient(135deg,#1266f1,#18a6a6);
+  color:white;
+  padding:25px 18px;
+}
+main{
+  max-width:1000px;
+  margin:auto;
+  padding:20px 15px;
+}
+.box{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px #0001;
+}
+input,button{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font:inherit;
+}
+button{
+  background:#1266f1;
+  color:white;
+  border:0;
+  font-weight:bold;
+}
+.logout{
+  background:#e53935;
+}
+.order{
+  border:1px solid #e2e6ed;
+  border-radius:15px;
+  padding:15px;
+  margin-top:12px;
+}
+.status{
+  font-weight:bold;
+  color:#1266f1;
+}
+.small{
+  color:#687386;
+  font-size:13px;
+  line-height:1.8;
+}
+.hidden{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🛠️ إدارة خِدْمَتي</h1>
+<p>لوحة إدارة طلبات الخدمات</p>
+</header>
+
+<main>
+
+<div id="loginBox" class="box">
+
+<h2>🔐 دخول الإدارة</h2>
+
+<input id="email" type="email" placeholder="البريد الإلكتروني">
+
+<input id="password" type="password" placeholder="كلمة المرور">
+
+<button onclick="login()">دخول</button>
+
+<p id="loginMessage" class="small"></p>
+
+</div>
+
+<div id="adminBox" class="hidden">
+
+<div class="box">
+
+<h2>📋 طلبات الخدمة</h2>
+
+<button onclick="loadOrders()">🔄 تحديث الطلبات</button>
+
+<button class="logout" onclick="logout()">تسجيل الخروج</button>
+
+</div>
+
+<div id="orders"></div>
+
+</div>
+
+</main>
+
+<script type="module">
+
+import { createClient } from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const SUPABASE_URL =
+"https://yqlsnbhuwduqypeqnssk.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_PvAR6EDs9bzpru68ZDWanA__T0S3u3X";
+
+const supabase =
+createClient(SUPABASE_URL,SUPABASE_KEY);
+
+window.login = async function(){
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+const message =
+document.getElementById("loginMessage");
+
+if(!email || !password){
+
+message.textContent="اكتب البريد الإلكتروني وكلمة المرور.";
+return;
+
+}
+
+const {error} =
+await supabase.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(error){
+
+message.textContent="بيانات الدخول غير صحيحة.";
+console.error(error);
+return;
+
+}
+
+document.getElementById("loginBox").classList.add("hidden");
+document.getElementById("adminBox").classList.remove("hidden");
+
+loadOrders();
+
+};
+
+window.logout = async function(){
+
+await supabase.auth.signOut();
+
+location.reload();
+
+};
+
+window.loadOrders = async function(){
+
+const orders =
+document.getElementById("orders");
+
+orders.innerHTML="<div class='box'>جاري تحميل الطلبات...</div>";
+
+const {data,error} =
+await supabase
+.from("service_requests")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error){
+
+orders.innerHTML=
+"<div class='box'>حدث خطأ في تحميل الطلبات.</div>";
+
+console.error(error);
+return;
+
+}
+
+if(!data || data.length===0){
+
+orders.innerHTML=
+"<div class='box'>لا توجد طلبات حالياً.</div>";
+
+return;
+
+}
+
+orders.innerHTML="";
+
+data.forEach(order=>{
+
+const div=document.createElement("div");
+
+div.className="order";
+
+div.innerHTML=`
+
+<h3>🆔 الطلب رقم ${order.id}</h3>
+
+<div class="small">
+
+<b>اسم العميل:</b>
+${order.customer_name || "-"}<br>
+
+<b>الهاتف:</b>
+${order.phone || "-"}<br>
+
+<b>الخدمة:</b>
+${order.service || "-"}<br>
+
+<b>التفاصيل:</b>
+${(order.details || "-").replace(/\n/g,"<br>")}<br>
+
+<b>طريقة الدفع:</b>
+${order.payment_method || "-"}<br>
+
+<b>الحالة:</b>
+<span class="status">${order.status || "-"}</span><br>
+
+<b>التاريخ:</b>
+${order.created_at || "-"}
+
+</div>
+
+`;
+
+orders.appendChild(div);
+
+});
+
+};
+
+</script>
+
+</body>
+</html>
