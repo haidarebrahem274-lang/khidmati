@@ -2,102 +2,549 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>خِدْمَتي — اطلبها… بتوصلك</title>
 <meta name="description" content="خِدْمَتي منصة خدمات محلية في سوريا">
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f5f7fb;color:#172033}
-header{background:linear-gradient(135deg,#1266f1,#18a6a6);color:white;padding:22px 18px 30px;border-radius:0 0 28px 28px}
-.top,.hero,main{max-width:900px;margin:auto}
-.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:28px;font-weight:800}
-.tag{font-size:13px;opacity:.9}
-.hero{margin-top:28px}
-.hero h1{font-size:30px;margin:0 0 8px}
-.hero p{margin:0 0 20px}
-.search{background:white;padding:10px;border-radius:18px;display:flex;gap:8px;box-shadow:0 10px 30px #0002}
-.search input{flex:1;border:0;outline:0;padding:13px;font-size:15px;min-width:0}
-button{border:0;border-radius:13px;padding:12px 16px;font-weight:700;cursor:pointer}
-.primary{background:#1266f1;color:white}
-.white{background:white;color:#1266f1}
-main{padding:0 16px;margin-top:24px}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
-.section-title h2{margin:0;font-size:20px}
-.hint{color:#687386;font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:white;border:1px solid #e6eaf0;border-radius:18px;padding:17px;text-align:right;box-shadow:0 5px 18px #1720330b}
-.icon{font-size:28px}
-.card b{display:block;margin:8px 0 4px}
-.card span{color:#718096;font-size:12px}
-.ad-box{margin:24px 0;background:linear-gradient(135deg,#fff,#eef7ff);border:1px solid #dcecff;border-radius:20px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.ad-icon{font-size:30px}
-.ad-box h3{margin:5px 0}
-.ad-box p{margin:0;color:#687386;font-size:13px}
-.cta{margin:24px 0;background:#172033;color:white;border-radius:20px;padding:20px}
-.cta h3{margin:0 0 7px}
-.cta p{margin:0 0 14px;color:#d7deea;font-size:13px}
-footer{text-align:center;color:#778196;padding:25px 10px;font-size:12px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;padding:18px;align-items:flex-end;justify-content:center}
-.modal.open{display:flex}
-.box{background:white;width:min(560px,100%);border-radius:24px;padding:20px;max-height:92vh;overflow:auto}
-.box-head{display:flex;justify-content:space-between;align-items:center}
-.close{background:#eef1f5;color:#333}
-label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
-input,textarea,select{width:100%;padding:13px;border:1px solid #d9dfe8;border-radius:12px;font:inherit;outline:0}
-textarea{min-height:100px;resize:vertical}
-.notice{background:#eef7ff;color:#1457a6;padding:11px;border-radius:12px;font-size:12px;margin-top:12px}
-.payment-info{background:#f0f8ff;color:#1457a6;padding:12px;border-radius:12px;margin-top:8px;font-size:13px;line-height:1.9;word-break:break-word}
-.address{font-family:monospace;direction:ltr;display:block;margin-top:5px}
-@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.modal{align-items:center}}
-@media(max-width:550px){.top{align-items:flex-start}.ad-box{flex-direction:column;align-items:stretch}.ad-box button{width:100%}}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+
+body.modal-open{
+  overflow:hidden;
+}
+
+header{
+  background:linear-gradient(135deg,#1266f1,#18a6a6);
+  color:white;
+  padding:22px 18px 30px;
+  border-radius:0 0 28px 28px;
+}
+
+.top,.hero,main{
+  max-width:900px;
+  margin:auto;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:800;
+}
+
+.tag{
+  font-size:13px;
+  opacity:.9;
+}
+
+.hero{
+  margin-top:28px;
+}
+
+.hero h1{
+  font-size:30px;
+  margin:0 0 8px;
+}
+
+.hero p{
+  margin:0 0 20px;
+  line-height:1.8;
+}
+
+.search{
+  background:white;
+  padding:10px;
+  border-radius:18px;
+  display:flex;
+  gap:8px;
+  box-shadow:0 10px 30px #0002;
+}
+
+.search input{
+  flex:1;
+  border:0;
+  outline:0;
+  padding:13px;
+  font-size:15px;
+  min-width:0;
+}
+
+button{
+  border:0;
+  border-radius:13px;
+  padding:12px 16px;
+  font-weight:700;
+  cursor:pointer;
+  font:inherit;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.primary{
+  background:#1266f1;
+  color:white;
+}
+
+.white{
+  background:white;
+  color:#1266f1;
+}
+
+main{
+  padding:0 16px;
+  margin-top:24px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:24px 0 12px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:20px;
+}
+
+.hint{
+  color:#687386;
+  font-size:12px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e6eaf0;
+  border-radius:18px;
+  padding:17px;
+  text-align:right;
+  box-shadow:0 5px 18px #1720330b;
+  color:#172033;
+  width:100%;
+}
+
+.card:active{
+  transform:scale(.98);
+}
+
+.icon{
+  font-size:28px;
+}
+
+.card b{
+  display:block;
+  margin:8px 0 4px;
+}
+
+.card span{
+  color:#718096;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.ad-box{
+  margin:24px 0;
+  background:linear-gradient(135deg,#fff,#eef7ff);
+  border:1px solid #dcecff;
+  border-radius:20px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.ad-icon{
+  font-size:30px;
+}
+
+.ad-box h3{
+  margin:5px 0;
+}
+
+.ad-box p{
+  margin:0;
+  color:#687386;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.cta{
+  margin:24px 0;
+  background:#172033;
+  color:white;
+  border-radius:20px;
+  padding:20px;
+}
+
+.cta h3{
+  margin:0 0 7px;
+}
+
+.cta p{
+  margin:0 0 14px;
+  color:#d7deea;
+  font-size:13px;
+  line-height:1.7;
+}
+
+footer{
+  text-align:center;
+  color:#778196;
+  padding:25px 10px;
+  font-size:12px;
+}
+
+/* نافذة الطلب */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:1000;
+  padding:12px;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.box{
+  background:white;
+  width:min(560px,100%);
+  border-radius:24px 24px 0 0;
+  padding:20px;
+  max-height:94vh;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  box-shadow:0 -10px 40px #0003;
+}
+
+.box-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  position:sticky;
+  top:-20px;
+  background:white;
+  padding:4px 0 12px;
+  z-index:2;
+}
+
+.box-head h2{
+  margin:0;
+  font-size:20px;
+}
+
+.close{
+  background:#eef1f5;
+  color:#333;
+  min-width:80px;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin:14px 0 6px;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d9dfe8;
+  border-radius:12px;
+  font:inherit;
+  outline:0;
+  background:white;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#1266f1;
+  box-shadow:0 0 0 3px #1266f11a;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.notice{
+  background:#eef7ff;
+  color:#1457a6;
+  padding:11px;
+  border-radius:12px;
+  font-size:12px;
+  margin-top:12px;
+  line-height:1.7;
+}
+
+.payment-info{
+  background:#f0f8ff;
+  color:#1457a6;
+  padding:12px;
+  border-radius:12px;
+  margin-top:8px;
+  font-size:13px;
+  line-height:1.9;
+  word-break:break-word;
+}
+
+.address{
+  font-family:monospace;
+  direction:ltr;
+  display:block;
+  margin-top:5px;
+  user-select:text;
+}
+
+.success-box{
+  display:none;
+  background:#eaf8ef;
+  border:1px solid #b8e5c6;
+  color:#155724;
+  padding:18px;
+  border-radius:16px;
+  margin-top:15px;
+  text-align:center;
+  line-height:1.8;
+}
+
+.order-number{
+  font-size:26px;
+  font-weight:800;
+  margin:10px 0;
+  color:#1266f1;
+  direction:ltr;
+}
+
+.success-actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.success-actions button{
+  flex:1;
+}
+
+.loading{
+  display:none;
+  text-align:center;
+  padding:12px;
+  color:#687386;
+  font-size:13px;
+}
+
+.error-box{
+  display:none;
+  background:#fff0f0;
+  border:1px solid #ffd0d0;
+  color:#a52222;
+  padding:12px;
+  border-radius:12px;
+  margin-top:12px;
+  font-size:13px;
+  line-height:1.7;
+}
+
+@media(min-width:650px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .modal{
+    align-items:center;
+  }
+
+  .box{
+    border-radius:24px;
+  }
+}
+
+@media(max-width:550px){
+  .top{
+    align-items:flex-start;
+  }
+
+  .top button{
+    padding:10px 11px;
+    font-size:12px;
+  }
+
+  .ad-box{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .ad-box button{
+    width:100%;
+  }
+
+  .search{
+    padding:8px;
+  }
+
+  .search button{
+    padding:11px 13px;
+  }
+
+  .modal{
+    padding:0;
+  }
+
+  .box{
+    border-radius:24px 24px 0 0;
+    max-height:96vh;
+    padding:18px 15px 24px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="top">
+
 <div>
 <div class="logo">خِدْمَتي</div>
 <div class="tag">اطلبها… بتوصلك</div>
 </div>
-<button class="white" onclick="openModal('provider')">سجّل كمقدّم خدمة</button>
+
+<button
+class="white"
+type="button"
+onclick="openModal('provider')"
+>
+سجّل كمقدّم خدمة
+</button>
+
 </div>
 
 <div class="hero">
+
 <h1>شو بدك؟</h1>
-<p>اطلب الخدمة اللي بدك ياها من مقدّمي الخدمات القريبين منك.</p>
+
+<p>
+اطلب الخدمة اللي بدك ياها من مقدّمي الخدمات القريبين منك.
+</p>
+
 <div class="search">
-<input id="search" placeholder="مثلاً: بدي كهربائي يصلّح قاطع">
-<button class="primary" onclick="searchService()">بحث</button>
+
+<input
+id="search"
+autocomplete="off"
+placeholder="مثلاً: بدي كهربائي يصلّح قاطع"
+>
+
+<button
+class="primary"
+type="button"
+onclick="searchService()"
+>
+بحث
+</button>
+
 </div>
+
 </div>
+
 </header>
 
 <main>
 
 <div class="section-title">
+
 <h2>الخدمات</h2>
-<span class="hint">كل سوريا 🇸🇾</span>
+
+<span class="hint">
+كل سوريا 🇸🇾
+</span>
+
 </div>
 
-<div class="grid" id="services"></div>
+<div
+class="grid"
+id="services"
+></div>
 
 <section class="ad-box">
+
 <div>
+
 <div class="ad-icon">📢</div>
-<h3>عندك محل أو مشروع؟</h3>
-<p>خلّي إعلانك يظهر لزوار خِدْمَتي ووصّل خدماتك لزبائن جدد.</p>
+
+<h3>
+عندك محل أو مشروع؟
+</h3>
+
+<p>
+خلّي إعلانك يظهر لزوار خِدْمَتي ووصّل خدماتك لزبائن جدد.
+</p>
+
 </div>
-<button class="primary" onclick="openModal('ad')">أعلن معنا</button>
+
+<button
+class="primary"
+type="button"
+onclick="openModal('ad')"
+>
+أعلن معنا
+</button>
+
 </section>
 
 <section class="cta">
-<h3>ما لقيت اللي بدك ياه؟</h3>
-<p>اكتب طلبك وسنضيفه ضمن الخدمات المطلوبة في منطقتك.</p>
-<button class="primary" onclick="openModal('request')">اطلب خدمة الآن</button>
+
+<h3>
+ما لقيت اللي بدك ياه؟
+</h3>
+
+<p>
+اكتب طلبك وسنضيفه ضمن الخدمات المطلوبة في منطقتك.
+</p>
+
+<button
+class="primary"
+type="button"
+onclick="openModal('request')"
+>
+اطلب خدمة الآن
+</button>
+
 </section>
 
 </main>
@@ -106,43 +553,114 @@ textarea{min-height:100px;resize:vertical}
 خِدْمَتي © 2026 — منصة خدمات محلية تبدأ من سوريا 🇸🇾
 </footer>
 
-<div class="modal" id="modal">
+<div
+class="modal"
+id="modal"
+role="dialog"
+aria-modal="true"
+>
+
 <div class="box">
 
 <div class="box-head">
-<h2 id="modalTitle">طلب خدمة</h2>
-<button class="close" onclick="closeModal()">إغلاق</button>
+
+<h2 id="modalTitle">
+طلب خدمة
+</h2>
+
+<button
+class="close"
+type="button"
+onclick="closeModal()"
+>
+إغلاق
+</button>
+
 </div>
 
-<form id="form" onsubmit="submitForm(event)">
+<form
+id="form"
+onsubmit="submitForm(event)"
+>
 
 <div id="normalService">
-<label>الخدمة</label>
+
+<label>
+الخدمة
+</label>
+
 <select id="service"></select>
+
 </div>
 
 <div id="providerFields" style="display:none">
-<label>اسم مقدّم الخدمة</label>
-<input id="providerName" placeholder="اسمك">
 
-<label>اختصاصك</label>
-<input id="providerJob" placeholder="مثلاً: كهربائي، سباك، مصلّح موبايلات">
+<label>
+اسم مقدّم الخدمة
+</label>
+
+<input
+id="providerName"
+autocomplete="name"
+placeholder="اسمك"
+>
+
+<label>
+اختصاصك
+</label>
+
+<input
+id="providerJob"
+placeholder="مثلاً: كهربائي، سباك، مصلّح موبايلات"
+>
+
 </div>
 
 <div id="adFields" style="display:none">
-<label>اسم المحل أو المشروع</label>
-<input id="adName" placeholder="مثلاً: محل حيدر للموبايلات">
 
-<label>نوع الإعلان</label>
+<label>
+اسم المحل أو المشروع
+</label>
+
+<input
+id="adName"
+placeholder="مثلاً: محل حيدر للموبايلات"
+>
+
+<label>
+نوع الإعلان
+</label>
+
 <select id="adType">
+
 <option>إعلان عادي</option>
 <option>إعلان مميز</option>
 <option>إعلان لمدة شهر</option>
+
 </select>
+
 </div>
 
-<label>المحافظة</label>
+<div id="customerNameField">
+
+<label>
+👤 اسم العميل
+</label>
+
+<input
+id="customerName"
+autocomplete="name"
+placeholder="اكتب اسمك"
+>
+
+</div>
+
+<label>
+المحافظة
+</label>
+
 <select id="governorate">
+
 <option>دمشق</option>
 <option>ريف دمشق</option>
 <option>حلب</option>
@@ -157,251 +675,876 @@ textarea{min-height:100px;resize:vertical}
 <option>درعا</option>
 <option>السويداء</option>
 <option>القنيطرة</option>
+
 </select>
 
-<label>المنطقة</label>
-<input id="area" placeholder="مثلاً: الرمل، الزراعة، المشروع...">
+<label>
+المنطقة
+</label>
 
-<label>وصف الطلب</label>
-<textarea id="details" placeholder="اشرح لنا شو المشكلة أو شو الخدمة المطلوبة"></textarea>
+<input
+id="area"
+autocomplete="address-level2"
+placeholder="مثلاً: الرمل، الزراعة، المشروع..."
+>
 
-<label>رقم للتواصل</label>
-<input id="phone" type="tel" placeholder="رقم الهاتف أو واتساب">
+<label>
+وصف الطلب
+</label>
+
+<textarea
+id="details"
+placeholder="اشرح لنا شو المشكلة أو شو الخدمة المطلوبة"
+></textarea>
+
+<label>
+📞 رقم للتواصل
+</label>
+
+<input
+id="phone"
+type="tel"
+autocomplete="tel"
+inputmode="tel"
+placeholder="رقم الهاتف أو واتساب"
+>
 
 <div id="paymentFields">
-<label>💳 طريقة الدفع</label>
 
-<select id="payment" onchange="showPaymentInfo()">
-<option value="shamcash">⭐ شام كاش</option>
-<option value="balance">📞 رصيد عادي</option>
-<option value="binance">🪙 USDT عبر Binance</option>
-<option value="cash">💵 دفع نقدي</option>
+<label>
+💳 طريقة الدفع
+</label>
+
+<select
+id="payment"
+onchange="showPaymentInfo()"
+>
+
+<option value="shamcash">
+⭐ شام كاش
+</option>
+
+<option value="balance">
+📞 رصيد عادي
+</option>
+
+<option value="binance">
+🪙 USDT عبر Binance
+</option>
+
+<option value="cash">
+💵 دفع نقدي
+</option>
+
 </select>
 
-<div id="paymentInfo" class="payment-info"></div>
+<div
+id="paymentInfo"
+class="payment-info"
+></div>
+
 </div>
 
-<div class="notice" id="notice">
+<div
+class="notice"
+id="notice"
+>
 ⭐ يُفضّل الدفع عبر شام كاش.
 </div>
 
-<button class="primary" style="width:100%;margin-top:15px" type="submit">
+<div
+id="errorBox"
+class="error-box"
+></div>
+
+<div
+id="loading"
+class="loading"
+>
+⏳ جارٍ إرسال الطلب، يرجى الانتظار...
+</div>
+
+<button
+id="submitButton"
+class="primary"
+style="width:100%;margin-top:15px"
+type="submit"
+>
 إرسال الطلب
 </button>
 
+<div
+id="successBox"
+class="success-box"
+>
+
+<div>
+✅ تم إرسال طلبك بنجاح
+</div>
+
+<div class="order-number">
+#<span id="orderNumber">-</span>
+</div>
+
+<div>
+احتفظ برقم الطلب للمتابعة.
+</div>
+
+<div class="success-actions">
+
+<button
+type="button"
+class="primary"
+onclick="closeModal()"
+>
+تم
+</button>
+
+</div>
+
+</div>
+
 </form>
-</div>
+
 </div>
 
-<script>
+</div>
 
-const SUPABASE_URL="https://yqlsnbhuwduqypeqnssk.supabase.co";
-const SUPABASE_KEY="sb_publishable_PvAR6EDs9bzpru68ZDWanA__T0S3u3X";
+<script type="module">
+
+const SUPABASE_URL =
+"https://yqlsnbhuwduqypeqnssk.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_PvAR6EDs9bzpru68ZDWanA__T0S3u3X";
+
+
+/* =========================
+   الخدمات
+========================= */
 
 const services=[
+
 ["🔧","صيانة منزلية","كهرباء، سباكة، تمديدات"],
+
 ["📱","موبايلات وكمبيوتر","صيانة وبرمجة وأجهزة"],
+
 ["🚗","سيارات","ميكانيك، كهرباء، خدمات"],
+
 ["🏠","منزل","تنظيف، دهان، نقل أثاث"],
+
 ["📚","دروس خصوصية","مدرسين لمختلف المواد"],
+
 ["🚚","نقل وتوصيل","نقل أغراض وطلبات"],
+
 ["💄","تجميل وعناية","حلاقين، صالونات، مكياج"],
+
 ["📸","تصوير ومناسبات","تصوير، فيديو، مناسبات"],
+
 ["💻","خدمات رقمية","تصميم، ترجمة، مونتاج"],
+
 ["🛒","شراء وتوصيل","طلبات من المحلات للبيت"]
+
 ];
 
-const grid=document.getElementById("services");
-const select=document.getElementById("service");
+
+const grid =
+document.getElementById("services");
+
+const select =
+document.getElementById("service");
+
 
 services.forEach((s,i)=>{
-grid.innerHTML+=`
-<button class="card" onclick="openModal('request',${i})">
-<div class="icon">${s[0]}</div>
-<b>${s[1]}</b>
-<span>${s[2]}</span>
-</button>`;
-select.innerHTML+=`<option value="${i}">${s[1]}</option>`;
+
+grid.innerHTML += `
+
+<button
+class="card"
+type="button"
+onclick="openModal('request',${i})"
+>
+
+<div class="icon">
+${s[0]}
+</div>
+
+<b>
+${s[1]}
+</b>
+
+<span>
+${s[2]}
+</span>
+
+</button>
+
+`;
+
+select.innerHTML += `
+
+<option value="${i}">
+${s[1]}
+</option>
+
+`;
+
 });
 
-function openModal(type,index){
-document.getElementById("modal").classList.add("open");
+
+/* =========================
+   فتح النافذة
+========================= */
+
+window.openModal =
+function(type,index){
+
+const modal =
+document.getElementById("modal");
+
+modal.classList.add("open");
+
+document.body.classList.add("modal-open");
 
 document.getElementById("normalService").style.display="none";
+
 document.getElementById("providerFields").style.display="none";
+
 document.getElementById("adFields").style.display="none";
+
 document.getElementById("paymentFields").style.display="none";
 
+document.getElementById("customerNameField").style.display="block";
+
+document.getElementById("successBox").style.display="none";
+
+document.getElementById("errorBox").style.display="none";
+
+document.getElementById("submitButton").style.display="block";
+
+document.getElementById("submitButton").disabled=false;
+
 if(type==="provider"){
-document.getElementById("modalTitle").textContent="تسجيل مقدّم خدمة";
+
+document.getElementById("modalTitle").textContent =
+"تسجيل مقدّم خدمة";
+
 document.getElementById("providerFields").style.display="block";
-document.getElementById("notice").textContent="سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
+
+document.getElementById("customerNameField").style.display="none";
+
+document.getElementById("notice").textContent =
+"سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
+
 }
+
 else if(type==="ad"){
-document.getElementById("modalTitle").textContent="📢 طلب إعلان";
+
+document.getElementById("modalTitle").textContent =
+"📢 طلب إعلان";
+
 document.getElementById("adFields").style.display="block";
-document.getElementById("notice").textContent="أرسل طلب الإعلان وسنتواصل معك.";
+
+document.getElementById("customerNameField").style.display="none";
+
+document.getElementById("notice").textContent =
+"أرسل طلب الإعلان وسنتواصل معك.";
+
 }
+
 else{
-document.getElementById("modalTitle").textContent="طلب خدمة";
+
+document.getElementById("modalTitle").textContent =
+"طلب خدمة";
+
 document.getElementById("normalService").style.display="block";
+
 document.getElementById("paymentFields").style.display="block";
-if(index!==undefined) document.getElementById("service").value=index;
+
+if(index!==undefined){
+
+document.getElementById("service").value=index;
+
+}
+
 showPaymentInfo();
-}
+
 }
 
-function showPaymentInfo(){
+setTimeout(()=>{
 
-const payment=document.getElementById("payment").value;
-const info=document.getElementById("paymentInfo");
+const firstInput =
+modal.querySelector(
+"input:not([type=hidden]), textarea, select"
+);
+
+if(firstInput){
+firstInput.focus();
+}
+
+},100);
+
+};
+
+
+/* =========================
+   إغلاق النافذة
+========================= */
+
+window.closeModal =
+function(){
+
+document
+.getElementById("modal")
+.classList
+.remove("open");
+
+document.body.classList.remove("modal-open");
+
+};
+
+
+/* الضغط خارج النافذة
+========================= */
+
+document
+.getElementById("modal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeModal();
+
+}
+
+});
+
+
+/* زر الرجوع بالموبايل
+========================= */
+
+let modalOpenedByApp=false;
+
+const originalOpenModal=window.openModal;
+
+window.openModal=function(type,index){
+
+modalOpenedByApp=true;
+
+history.pushState(
+{khidmatiModal:true},
+"",
+"#طلب"
+);
+
+originalOpenModal(type,index);
+
+};
+
+window.addEventListener("popstate",function(){
+
+if(document.getElementById("modal").classList.contains("open")){
+
+document
+.getElementById("modal")
+.classList
+.remove("open");
+
+document.body.classList.remove("modal-open");
+
+}
+
+});
+
+
+/* =========================
+   معلومات الدفع
+========================= */
+
+window.showPaymentInfo =
+function(){
+
+const payment =
+document
+.getElementById("payment")
+.value;
+
+const info =
+document.getElementById("paymentInfo");
+
 
 if(payment==="shamcash"){
-info.innerHTML="⭐ <b>شام كاش</b><br>معرّف الاستلام:<br><span class='address'>1082480122968790</span>";
+
+info.innerHTML=
+"⭐ <b>شام كاش</b><br>"+
+"معرّف الاستلام:<br>"+
+"<span class='address'>1082480122968790</span>";
+
 }
+
 else if(payment==="balance"){
-info.innerHTML="📞 <b>رصيد عادي</b><br>رقم التحويل:<br><span class='address'>0995241394</span>";
+
+info.innerHTML=
+"📞 <b>رصيد عادي</b><br>"+
+"رقم التحويل:<br>"+
+"<span class='address'>0995241394</span>";
+
 }
+
 else if(payment==="binance"){
-info.innerHTML="🪙 <b>USDT عبر Binance</b><br>الشبكة: BNB Smart Chain (BEP20)<br>العنوان:<br><span class='address'>0xD7e44A1e6D6837dFa316F6E673adeE86baf25775</span>";
+
+info.innerHTML=
+"🪙 <b>USDT عبر Binance</b><br>"+
+"الشبكة: BNB Smart Chain (BEP20)<br>"+
+"العنوان:<br>"+
+"<span class='address'>0xD7e44A1e6D6837dFa316F6E673adeE86baf25775</span>";
+
 }
+
 else{
-info.innerHTML="💵 <b>دفع نقدي</b><br>الدفع لمقدّم الخدمة حسب الاتفاق.";
-}
+
+info.innerHTML=
+"💵 <b>دفع نقدي</b><br>"+
+"الدفع لمقدّم الخدمة حسب الاتفاق.";
 
 }
 
-function closeModal(){
-document.getElementById("modal").classList.remove("open");
-}
+};
 
-function searchService(){
-const q=document.getElementById("search").value.trim();
-if(!q){openModal("request");return;}
-document.getElementById("details").value=q;
+
+/* =========================
+   البحث
+========================= */
+
+window.searchService =
+function(){
+
+const q =
+document
+.getElementById("search")
+.value
+.trim();
+
+if(!q){
+
 openModal("request");
+
+return;
+
 }
+
+openModal("request");
+
+document
+.getElementById("details")
+.value=q;
+
+};
+
+
+/* =========================
+   حفظ الطلب
+========================= */
 
 async function saveRequest(data){
 
-const response=await fetch(
-SUPABASE_URL+"/rest/v1/service_requests",
+const response =
+await fetch(
+
+SUPABASE_URL+
+"/rest/v1/service_requests",
+
 {
+
 method:"POST",
+
 headers:{
+
 "apikey":SUPABASE_KEY,
-"Authorization":"Bearer "+SUPABASE_KEY,
-"Content-Type":"application/json",
-"Prefer":"return=minimal"
+
+"Authorization":
+"Bearer "+SUPABASE_KEY,
+
+"Content-Type":
+"application/json",
+
+"Prefer":
+"return=representation"
+
 },
-body:JSON.stringify(data)
+
+body:
+JSON.stringify(data)
+
 }
+
 );
 
+
 if(!response.ok){
-const error=await response.text();
+
+const error =
+await response.text();
+
 console.error(error);
+
 throw new Error(error);
-}
 
 }
 
-async function submitForm(e){
+
+return await response.json();
+
+}
+
+
+/* =========================
+   منع الإرسال المزدوج
+========================= */
+
+let isSubmitting=false;
+
+
+/* =========================
+   إرسال النموذج
+========================= */
+
+window.submitForm =
+async function(e){
 
 e.preventDefault();
 
-const title=document.getElementById("modalTitle").textContent;
+if(isSubmitting){
+
+return;
+
+}
+
+const title =
+document
+.getElementById("modalTitle")
+.textContent;
+
+
+const submitButton =
+document.getElementById("submitButton");
+
+const loading =
+document.getElementById("loading");
+
+const errorBox =
+document.getElementById("errorBox");
+
+
+errorBox.style.display="none";
+
+
+/* منع التكرار */
+
+isSubmitting=true;
+
+submitButton.disabled=true;
+
+submitButton.style.opacity=".6";
+
+loading.style.display="block";
+
 
 try{
 
+
+/* =========================
+   الإعلان
+========================= */
+
 if(title.includes("إعلان")){
 
-const name=document.getElementById("adName").value.trim();
-const phone=document.getElementById("phone").value.trim();
+const name =
+document
+.getElementById("adName")
+.value
+.trim();
 
-if(!name||!phone){
-alert("رجاءً اكتب اسم المحل ورقم التواصل.");
-return;
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
+
+if(!name || !phone){
+
+throw new Error(
+"رجاءً اكتب اسم المحل ورقم التواصل."
+);
+
 }
 
+
+const result =
 await saveRequest({
+
 customer_name:name,
+
 phone:phone,
+
 service:"إعلان",
-details:"نوع الإعلان: "+document.getElementById("adType").value,
-payment_method:"غير محدد",
-status:"طلب إعلان"
+
+details:
+"نوع الإعلان: "+
+document
+.getElementById("adType")
+.value,
+
+payment_method:
+"غير محدد",
+
+status:
+"طلب إعلان"
+
 });
 
-alert("تم تسجيل طلب الإعلان بنجاح 📢");
 
-}
+showSuccess(result);
 
-else if(title.includes("مقدّم")){
-
-const name=document.getElementById("providerName").value.trim();
-const job=document.getElementById("providerJob").value.trim();
-const phone=document.getElementById("phone").value.trim();
-
-if(!name||!job||!phone){
-alert("رجاءً أكمل الاسم والاختصاص ورقم التواصل.");
 return;
+
 }
 
+
+/* =========================
+   مقدّم خدمة
+========================= */
+
+if(title.includes("مقدّم")){
+
+const name =
+document
+.getElementById("providerName")
+.value
+.trim();
+
+const job =
+document
+.getElementById("providerJob")
+.value
+.trim();
+
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
+
+if(!name || !job || !phone){
+
+throw new Error(
+"رجاءً أكمل الاسم والاختصاص ورقم التواصل."
+);
+
+}
+
+
+const result =
 await saveRequest({
+
 customer_name:name,
+
 phone:phone,
+
 service:"مقدّم خدمة",
-details:"الاختصاص: "+job,
-payment_method:"غير محدد",
-status:"مقدّم خدمة"
+
+details:
+"الاختصاص: "+job,
+
+payment_method:
+"غير محدد",
+
+status:
+"مقدّم خدمة"
+
 });
 
-alert("تم تسجيلك كمقدّم خدمة ❤️");
 
-}
+showSuccess(result);
 
-else{
-
-const service=document.getElementById("service").selectedOptions[0].text;
-const governorate=document.getElementById("governorate").value;
-const area=document.getElementById("area").value.trim();
-const phone=document.getElementById("phone").value.trim();
-const details=document.getElementById("details").value.trim();
-const payment=document.getElementById("payment").selectedOptions[0].text;
-
-if(!area||!phone){
-alert("رجاءً اكتب المنطقة ورقم التواصل.");
 return;
+
 }
 
+
+/* =========================
+   طلب خدمة
+========================= */
+
+const customerName =
+document
+.getElementById("customerName")
+.value
+.trim();
+
+
+const service =
+document
+.getElementById("service")
+.selectedOptions[0]
+.text;
+
+
+const governorate =
+document
+.getElementById("governorate")
+.value;
+
+
+const area =
+document
+.getElementById("area")
+.value
+.trim();
+
+
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
+
+
+const details =
+document
+.getElementById("details")
+.value
+.trim();
+
+
+const payment =
+document
+.getElementById("payment")
+.selectedOptions[0]
+.text;
+
+
+if(!customerName){
+
+throw new Error(
+"رجاءً اكتب اسمك."
+);
+
+}
+
+
+if(!area){
+
+throw new Error(
+"رجاءً اكتب المنطقة."
+);
+
+}
+
+
+if(!phone){
+
+throw new Error(
+"رجاءً اكتب رقم التواصل."
+);
+
+}
+
+
+const result =
 await saveRequest({
-customer_name:"زبون",
-phone:phone,
-service:service,
-details:"المحافظة: "+governorate+"\nالمنطقة: "+area+"\nالتفاصيل: "+details,
-payment_method:payment,
-status:"جديد"
+
+customer_name:
+customerName,
+
+phone:
+phone,
+
+service:
+service,
+
+details:
+"المحافظة: "+
+governorate+
+"\nالمنطقة: "+
+area+
+"\nالتفاصيل: "+
+details,
+
+payment_method:
+payment,
+
+status:
+"جديد"
+
 });
 
-alert("تم إرسال طلب الخدمة وحفظه بنجاح ❤️");
 
-}
+showSuccess(result);
 
-e.target.reset();
-closeModal();
 
 }catch(error){
 
-alert("حدث خطأ أثناء حفظ الطلب. تأكد من إعدادات Supabase.");
-
 console.error(error);
 
-}
+errorBox.textContent =
+error.message ||
+"حدث خطأ أثناء إرسال الطلب. تأكد من اتصالك بالإنترنت.";
+
+errorBox.style.display="block";
 
 }
+finally{
 
-</script>
+isSubmitting=false;
 
-</body>
-  </html>
+submitButton.disabled=false;
+
+submitButton.style.opacity="1";
+
+loading.style.display="none";
+
+}
+
+};
+
+
+/* =========================
+   نجاح الطلب
+========================= */
+
+function showSuccess(result){
+
+let orderId="-";
+
+if(Array.isArray(result) && result.length){
+
+orderId=result[0].id;
+
+}
+
+document
+.getElementById("orderNumber")
+.textContent=
+orderId;
+
+document
+.getElementById("successBox")
+.style.display="block";
+
+document
+.getElementById("submitButton")
+.style.display="none";
+
+document
+.getElementById("form")
+.reset();
+
+document
+.getElementById("payment")
+.value="shamcash";
+
+showPaymentInfo();
+
+document
+.getElementById("successBox")
