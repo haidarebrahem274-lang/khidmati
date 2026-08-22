@@ -1301,7 +1301,8 @@ showSuccess(result);
 }catch(error){
 
 alert(
-"حدث خطأ أثناء حفظ الطلب. تأكد من الاتصال بالإنترنت."
+"❌ خطأ أثناء حفظ الطلب:\n\n"+
+(error.message || error)
 );
 
 console.error(error);
