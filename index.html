@@ -2,26 +2,18 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>خِدْمَتي — اطلبها… بتوصلك</title>
 <meta name="description" content="خِدْمَتي منصة خدمات محلية في سوريا">
 
 <style>
 *{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   margin:0;
   font-family:Tahoma,Arial,sans-serif;
   background:#f5f7fb;
   color:#172033;
-}
-
-body.modal-open{
-  overflow:hidden;
 }
 
 header{
@@ -64,7 +56,6 @@ header{
 
 .hero p{
   margin:0 0 20px;
-  line-height:1.8;
 }
 
 .search{
@@ -92,12 +83,6 @@ button{
   font-weight:700;
   cursor:pointer;
   font:inherit;
-  -webkit-tap-highlight-color:transparent;
-}
-
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
 }
 
 .primary{
@@ -146,11 +131,6 @@ main{
   text-align:right;
   box-shadow:0 5px 18px #1720330b;
   color:#172033;
-  width:100%;
-}
-
-.card:active{
-  transform:scale(.98);
 }
 
 .icon{
@@ -165,7 +145,6 @@ main{
 .card span{
   color:#718096;
   font-size:12px;
-  line-height:1.7;
 }
 
 .ad-box{
@@ -192,7 +171,6 @@ main{
   margin:0;
   color:#687386;
   font-size:13px;
-  line-height:1.7;
 }
 
 .cta{
@@ -211,7 +189,6 @@ main{
   margin:0 0 14px;
   color:#d7deea;
   font-size:13px;
-  line-height:1.7;
 }
 
 footer{
@@ -221,14 +198,13 @@ footer{
   font-size:12px;
 }
 
-/* نافذة الطلب */
 .modal{
   display:none;
   position:fixed;
   inset:0;
   background:#0008;
-  z-index:1000;
-  padding:12px;
+  z-index:10;
+  padding:18px;
   align-items:flex-end;
   justify-content:center;
 }
@@ -240,35 +216,21 @@ footer{
 .box{
   background:white;
   width:min(560px,100%);
-  border-radius:24px 24px 0 0;
+  border-radius:24px;
   padding:20px;
-  max-height:94vh;
+  max-height:92vh;
   overflow:auto;
-  -webkit-overflow-scrolling:touch;
-  box-shadow:0 -10px 40px #0003;
 }
 
 .box-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-  position:sticky;
-  top:-20px;
-  background:white;
-  padding:4px 0 12px;
-  z-index:2;
-}
-
-.box-head h2{
-  margin:0;
-  font-size:20px;
 }
 
 .close{
   background:#eef1f5;
   color:#333;
-  min-width:80px;
 }
 
 label{
@@ -285,14 +247,6 @@ input,textarea,select{
   border-radius:12px;
   font:inherit;
   outline:0;
-  background:white;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:#1266f1;
-  box-shadow:0 0 0 3px #1266f11a;
 }
 
 textarea{
@@ -307,7 +261,6 @@ textarea{
   border-radius:12px;
   font-size:12px;
   margin-top:12px;
-  line-height:1.7;
 }
 
 .payment-info{
@@ -326,7 +279,6 @@ textarea{
   direction:ltr;
   display:block;
   margin-top:5px;
-  user-select:text;
 }
 
 .success-box{
@@ -338,7 +290,6 @@ textarea{
   border-radius:16px;
   margin-top:15px;
   text-align:center;
-  line-height:1.8;
 }
 
 .order-number{
@@ -346,37 +297,6 @@ textarea{
   font-weight:800;
   margin:10px 0;
   color:#1266f1;
-  direction:ltr;
-}
-
-.success-actions{
-  display:flex;
-  gap:8px;
-  margin-top:14px;
-}
-
-.success-actions button{
-  flex:1;
-}
-
-.loading{
-  display:none;
-  text-align:center;
-  padding:12px;
-  color:#687386;
-  font-size:13px;
-}
-
-.error-box{
-  display:none;
-  background:#fff0f0;
-  border:1px solid #ffd0d0;
-  color:#a52222;
-  padding:12px;
-  border-radius:12px;
-  margin-top:12px;
-  font-size:13px;
-  line-height:1.7;
 }
 
 @media(min-width:650px){
@@ -387,20 +307,11 @@ textarea{
   .modal{
     align-items:center;
   }
-
-  .box{
-    border-radius:24px;
-  }
 }
 
 @media(max-width:550px){
   .top{
     align-items:flex-start;
-  }
-
-  .top button{
-    padding:10px 11px;
-    font-size:12px;
   }
 
   .ad-box{
@@ -410,24 +321,6 @@ textarea{
 
   .ad-box button{
     width:100%;
-  }
-
-  .search{
-    padding:8px;
-  }
-
-  .search button{
-    padding:11px 13px;
-  }
-
-  .modal{
-    padding:0;
-  }
-
-  .box{
-    border-radius:24px 24px 0 0;
-    max-height:96vh;
-    padding:18px 15px 24px;
   }
 }
 </style>
@@ -446,7 +339,6 @@ textarea{
 
 <button
 class="white"
-type="button"
 onclick="openModal('provider')"
 >
 سجّل كمقدّم خدمة
@@ -466,13 +358,11 @@ onclick="openModal('provider')"
 
 <input
 id="search"
-autocomplete="off"
 placeholder="مثلاً: بدي كهربائي يصلّح قاطع"
 >
 
 <button
 class="primary"
-type="button"
 onclick="searchService()"
 >
 بحث
@@ -483,6 +373,7 @@ onclick="searchService()"
 </div>
 
 </header>
+
 
 <main>
 
@@ -496,10 +387,12 @@ onclick="searchService()"
 
 </div>
 
+
 <div
 class="grid"
 id="services"
 ></div>
+
 
 <section class="ad-box">
 
@@ -519,13 +412,13 @@ id="services"
 
 <button
 class="primary"
-type="button"
 onclick="openModal('ad')"
 >
 أعلن معنا
 </button>
 
 </section>
+
 
 <section class="cta">
 
@@ -539,7 +432,6 @@ onclick="openModal('ad')"
 
 <button
 class="primary"
-type="button"
 onclick="openModal('request')"
 >
 اطلب خدمة الآن
@@ -549,15 +441,15 @@ onclick="openModal('request')"
 
 </main>
 
+
 <footer>
 خِدْمَتي © 2026 — منصة خدمات محلية تبدأ من سوريا 🇸🇾
 </footer>
 
+
 <div
 class="modal"
 id="modal"
-role="dialog"
-aria-modal="true"
 >
 
 <div class="box">
@@ -570,7 +462,6 @@ aria-modal="true"
 
 <button
 class="close"
-type="button"
 onclick="closeModal()"
 >
 إغلاق
@@ -578,10 +469,12 @@ onclick="closeModal()"
 
 </div>
 
+
 <form
 id="form"
 onsubmit="submitForm(event)"
 >
+
 
 <div id="normalService">
 
@@ -593,6 +486,7 @@ onsubmit="submitForm(event)"
 
 </div>
 
+
 <div id="providerFields" style="display:none">
 
 <label>
@@ -601,7 +495,6 @@ onsubmit="submitForm(event)"
 
 <input
 id="providerName"
-autocomplete="name"
 placeholder="اسمك"
 >
 
@@ -615,6 +508,7 @@ placeholder="مثلاً: كهربائي، سباك، مصلّح موبايلات
 >
 
 </div>
+
 
 <div id="adFields" style="display:none">
 
@@ -633,13 +527,22 @@ placeholder="مثلاً: محل حيدر للموبايلات"
 
 <select id="adType">
 
-<option>إعلان عادي</option>
-<option>إعلان مميز</option>
-<option>إعلان لمدة شهر</option>
+<option>
+إعلان عادي
+</option>
+
+<option>
+إعلان مميز
+</option>
+
+<option>
+إعلان لمدة شهر
+</option>
 
 </select>
 
 </div>
+
 
 <div id="customerNameField">
 
@@ -649,11 +552,11 @@ placeholder="مثلاً: محل حيدر للموبايلات"
 
 <input
 id="customerName"
-autocomplete="name"
 placeholder="اكتب اسمك"
 >
 
 </div>
+
 
 <label>
 المحافظة
@@ -678,15 +581,16 @@ placeholder="اكتب اسمك"
 
 </select>
 
+
 <label>
 المنطقة
 </label>
 
 <input
 id="area"
-autocomplete="address-level2"
 placeholder="مثلاً: الرمل، الزراعة، المشروع..."
 >
+
 
 <label>
 وصف الطلب
@@ -697,6 +601,7 @@ id="details"
 placeholder="اشرح لنا شو المشكلة أو شو الخدمة المطلوبة"
 ></textarea>
 
+
 <label>
 📞 رقم للتواصل
 </label>
@@ -704,10 +609,9 @@ placeholder="اشرح لنا شو المشكلة أو شو الخدمة المط
 <input
 id="phone"
 type="tel"
-autocomplete="tel"
-inputmode="tel"
 placeholder="رقم الهاتف أو واتساب"
 >
+
 
 <div id="paymentFields">
 
@@ -738,12 +642,14 @@ onchange="showPaymentInfo()"
 
 </select>
 
+
 <div
 id="paymentInfo"
 class="payment-info"
 ></div>
 
 </div>
+
 
 <div
 class="notice"
@@ -752,26 +658,15 @@ id="notice"
 ⭐ يُفضّل الدفع عبر شام كاش.
 </div>
 
-<div
-id="errorBox"
-class="error-box"
-></div>
-
-<div
-id="loading"
-class="loading"
->
-⏳ جارٍ إرسال الطلب، يرجى الانتظار...
-</div>
 
 <button
-id="submitButton"
 class="primary"
 style="width:100%;margin-top:15px"
 type="submit"
 >
 إرسال الطلب
 </button>
+
 
 <div
 id="successBox"
@@ -790,25 +685,15 @@ class="success-box"
 احتفظ برقم الطلب للمتابعة.
 </div>
 
-<div class="success-actions">
-
-<button
-type="button"
-class="primary"
-onclick="closeModal()"
->
-تم
-</button>
-
 </div>
 
-</div>
 
 </form>
 
 </div>
 
 </div>
+
 
 <script type="module">
 
@@ -818,10 +703,6 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_PvAR6EDs9bzpru68ZDWanA__T0S3u3X";
 
-
-/* =========================
-   الخدمات
-========================= */
 
 const services=[
 
@@ -861,7 +742,6 @@ grid.innerHTML += `
 
 <button
 class="card"
-type="button"
 onclick="openModal('request',${i})"
 >
 
@@ -892,174 +772,130 @@ ${s[1]}
 });
 
 
-/* =========================
-   فتح النافذة
-========================= */
-
 window.openModal =
 function(type,index){
 
-const modal =
-document.getElementById("modal");
+document
+.getElementById("modal")
+.classList
+.add("open");
 
-modal.classList.add("open");
 
-document.body.classList.add("modal-open");
+document
+.getElementById("normalService")
+.style.display="none";
 
-document.getElementById("normalService").style.display="none";
 
-document.getElementById("providerFields").style.display="none";
+document
+.getElementById("providerFields")
+.style.display="none";
 
-document.getElementById("adFields").style.display="none";
 
-document.getElementById("paymentFields").style.display="none";
+document
+.getElementById("adFields")
+.style.display="none";
 
-document.getElementById("customerNameField").style.display="block";
 
-document.getElementById("successBox").style.display="none";
+document
+.getElementById("paymentFields")
+.style.display="none";
 
-document.getElementById("errorBox").style.display="none";
 
-document.getElementById("submitButton").style.display="block";
+document
+.getElementById("customerNameField")
+.style.display="block";
 
-document.getElementById("submitButton").disabled=false;
+
+document
+.getElementById("successBox")
+.style.display="none";
+
 
 if(type==="provider"){
 
-document.getElementById("modalTitle").textContent =
+document
+.getElementById("modalTitle")
+.textContent=
 "تسجيل مقدّم خدمة";
 
-document.getElementById("providerFields").style.display="block";
 
-document.getElementById("customerNameField").style.display="none";
+document
+.getElementById("providerFields")
+.style.display="block";
 
-document.getElementById("notice").textContent =
+
+document
+.getElementById("customerNameField")
+.style.display="none";
+
+
+document
+.getElementById("notice")
+.textContent=
 "سجّل بياناتك كمقدّم خدمة وسنتواصل معك.";
 
 }
 
+
 else if(type==="ad"){
 
-document.getElementById("modalTitle").textContent =
+document
+.getElementById("modalTitle")
+.textContent=
 "📢 طلب إعلان";
 
-document.getElementById("adFields").style.display="block";
 
-document.getElementById("customerNameField").style.display="none";
+document
+.getElementById("adFields")
+.style.display="block";
 
-document.getElementById("notice").textContent =
+
+document
+.getElementById("customerNameField")
+.style.display="none";
+
+
+document
+.getElementById("notice")
+.textContent=
 "أرسل طلب الإعلان وسنتواصل معك.";
 
 }
 
+
 else{
 
-document.getElementById("modalTitle").textContent =
+document
+.getElementById("modalTitle")
+.textContent=
 "طلب خدمة";
 
-document.getElementById("normalService").style.display="block";
 
-document.getElementById("paymentFields").style.display="block";
+document
+.getElementById("normalService")
+.style.display="block";
+
+
+document
+.getElementById("paymentFields")
+.style.display="block";
+
 
 if(index!==undefined){
 
-document.getElementById("service").value=index;
+document
+.getElementById("service")
+.value=index;
 
 }
+
 
 showPaymentInfo();
 
 }
 
-setTimeout(()=>{
-
-const firstInput =
-modal.querySelector(
-"input:not([type=hidden]), textarea, select"
-);
-
-if(firstInput){
-firstInput.focus();
-}
-
-},100);
-
 };
 
-
-/* =========================
-   إغلاق النافذة
-========================= */
-
-window.closeModal =
-function(){
-
-document
-.getElementById("modal")
-.classList
-.remove("open");
-
-document.body.classList.remove("modal-open");
-
-};
-
-
-/* الضغط خارج النافذة
-========================= */
-
-document
-.getElementById("modal")
-.addEventListener("click",function(e){
-
-if(e.target === this){
-
-closeModal();
-
-}
-
-});
-
-
-/* زر الرجوع بالموبايل
-========================= */
-
-let modalOpenedByApp=false;
-
-const originalOpenModal=window.openModal;
-
-window.openModal=function(type,index){
-
-modalOpenedByApp=true;
-
-history.pushState(
-{khidmatiModal:true},
-"",
-"#طلب"
-);
-
-originalOpenModal(type,index);
-
-};
-
-window.addEventListener("popstate",function(){
-
-if(document.getElementById("modal").classList.contains("open")){
-
-document
-.getElementById("modal")
-.classList
-.remove("open");
-
-document.body.classList.remove("modal-open");
-
-}
-
-});
-
-
-/* =========================
-   معلومات الدفع
-========================= */
 
 window.showPaymentInfo =
 function(){
@@ -1070,7 +906,8 @@ document
 .value;
 
 const info =
-document.getElementById("paymentInfo");
+document
+.getElementById("paymentInfo");
 
 
 if(payment==="shamcash"){
@@ -1082,6 +919,7 @@ info.innerHTML=
 
 }
 
+
 else if(payment==="balance"){
 
 info.innerHTML=
@@ -1090,6 +928,7 @@ info.innerHTML=
 "<span class='address'>0995241394</span>";
 
 }
+
 
 else if(payment==="binance"){
 
@@ -1100,6 +939,7 @@ info.innerHTML=
 "<span class='address'>0xD7e44A1e6D6837dFa316F6E673adeE86baf25775</span>";
 
 }
+
 
 else{
 
@@ -1112,9 +952,16 @@ info.innerHTML=
 };
 
 
-/* =========================
-   البحث
-========================= */
+window.closeModal =
+function(){
+
+document
+.getElementById("modal")
+.classList
+.remove("open");
+
+};
+
 
 window.searchService =
 function(){
@@ -1125,6 +972,7 @@ document
 .value
 .trim();
 
+
 if(!q){
 
 openModal("request");
@@ -1133,7 +981,9 @@ return;
 
 }
 
+
 openModal("request");
+
 
 document
 .getElementById("details")
@@ -1141,10 +991,6 @@ document
 
 };
 
-
-/* =========================
-   حفظ الطلب
-========================= */
 
 async function saveRequest(data){
 
@@ -1198,27 +1044,11 @@ return await response.json();
 }
 
 
-/* =========================
-   منع الإرسال المزدوج
-========================= */
-
-let isSubmitting=false;
-
-
-/* =========================
-   إرسال النموذج
-========================= */
-
 window.submitForm =
 async function(e){
 
 e.preventDefault();
 
-if(isSubmitting){
-
-return;
-
-}
 
 const title =
 document
@@ -1226,36 +1056,10 @@ document
 .textContent;
 
 
-const submitButton =
-document.getElementById("submitButton");
-
-const loading =
-document.getElementById("loading");
-
-const errorBox =
-document.getElementById("errorBox");
-
-
-errorBox.style.display="none";
-
-
-/* منع التكرار */
-
-isSubmitting=true;
-
-submitButton.disabled=true;
-
-submitButton.style.opacity=".6";
-
-loading.style.display="block";
-
-
 try{
 
 
-/* =========================
-   الإعلان
-========================= */
+/* الإعلان */
 
 if(title.includes("إعلان")){
 
@@ -1265,17 +1069,21 @@ document
 .value
 .trim();
 
+
 const phone =
 document
 .getElementById("phone")
 .value
 .trim();
 
+
 if(!name || !phone){
 
-throw new Error(
+alert(
 "رجاءً اكتب اسم المحل ورقم التواصل."
 );
+
+return;
 
 }
 
@@ -1311,9 +1119,7 @@ return;
 }
 
 
-/* =========================
-   مقدّم خدمة
-========================= */
+/* مقدّم خدمة */
 
 if(title.includes("مقدّم")){
 
@@ -1323,11 +1129,13 @@ document
 .value
 .trim();
 
+
 const job =
 document
 .getElementById("providerJob")
 .value
 .trim();
+
 
 const phone =
 document
@@ -1335,11 +1143,14 @@ document
 .value
 .trim();
 
+
 if(!name || !job || !phone){
 
-throw new Error(
+alert(
 "رجاءً أكمل الاسم والاختصاص ورقم التواصل."
 );
+
+return;
 
 }
 
@@ -1372,9 +1183,7 @@ return;
 }
 
 
-/* =========================
-   طلب خدمة
-========================= */
+/* طلب خدمة */
 
 const customerName =
 document
@@ -1426,27 +1235,33 @@ document
 
 if(!customerName){
 
-throw new Error(
+alert(
 "رجاءً اكتب اسمك."
 );
+
+return;
 
 }
 
 
 if(!area){
 
-throw new Error(
+alert(
 "رجاءً اكتب المنطقة."
 );
+
+return;
 
 }
 
 
 if(!phone){
 
-throw new Error(
+alert(
 "رجاءً اكتب رقم التواصل."
 );
+
+return;
 
 }
 
@@ -1485,37 +1300,21 @@ showSuccess(result);
 
 }catch(error){
 
+alert(
+"حدث خطأ أثناء حفظ الطلب. تأكد من الاتصال بالإنترنت."
+);
+
 console.error(error);
-
-errorBox.textContent =
-error.message ||
-"حدث خطأ أثناء إرسال الطلب. تأكد من اتصالك بالإنترنت.";
-
-errorBox.style.display="block";
-
-}
-finally{
-
-isSubmitting=false;
-
-submitButton.disabled=false;
-
-submitButton.style.opacity="1";
-
-loading.style.display="none";
 
 }
 
 };
 
 
-/* =========================
-   نجاح الطلب
-========================= */
-
 function showSuccess(result){
 
 let orderId="-";
+
 
 if(Array.isArray(result) && result.length){
 
@@ -1523,28 +1322,34 @@ orderId=result[0].id;
 
 }
 
+
 document
 .getElementById("orderNumber")
 .textContent=
 orderId;
 
+
 document
 .getElementById("successBox")
 .style.display="block";
 
+
 document
-.getElementById("submitButton")
-.style.display="none";
+.getElementById("form")
+.scrollTop=0;
+
 
 document
 .getElementById("form")
 .reset();
 
-document
-.getElementById("payment")
-.value="shamcash";
 
 showPaymentInfo();
 
-document
-.getElementById("successBox")
+}
+
+
+</script>
+
+</body>
+  </html>
