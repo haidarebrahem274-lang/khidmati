@@ -4,244 +4,680 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>خِدْمَتي — اطلبها… بتوصلك</title>
+<title>خِدْمَتي | منصة الخدمات الذكية</title>
 
-<meta name="description" content="خِدْمَتي منصة خدمات محلية في سوريا">
+<meta name="description" content="خِدْمَتي منصة ذكية تربط الزبائن بمقدمي الخدمات تلقائياً.">
 
 <style>
 *{
-box-sizing:border-box
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-margin:0;
-font-family:Tahoma,Arial,sans-serif;
-background:#f5f7fb;
-color:#172033
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+button,input,select,textarea{
+  font-family:inherit;
 }
 
 header{
-background:linear-gradient(135deg,#1266f1,#18a6a6);
-color:white;
-padding:22px 18px 30px;
-border-radius:0 0 28px 28px
+  background:linear-gradient(135deg,#1266f1,#12a89d);
+  color:white;
+  padding:20px 16px 45px;
+  border-radius:0 0 32px 32px;
 }
 
-.top,.hero,main{
-max-width:900px;
-margin:auto
+.container{
+  max-width:1000px;
+  margin:auto;
 }
 
 .top{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
 
 .logo{
-font-size:28px;
-font-weight:800
+  font-size:30px;
+  font-weight:bold;
 }
 
 .tag{
-font-size:13px;
-opacity:.9
+  font-size:12px;
+  opacity:.9;
+  margin-top:4px;
 }
 
-.hero{
-margin-top:28px
-}
-
-.hero h1{
-font-size:30px;
-margin:0 0 8px
-}
-
-.hero p{
-margin:0 0 20px
-}
-
-.search{
-background:white;
-padding:10px;
-border-radius:18px;
-display:flex;
-gap:8px;
-box-shadow:0 10px 30px #0002
-}
-
-.search input{
-flex:1;
-border:0;
-outline:0;
-padding:13px;
-font-size:15px;
-min-width:0
+.top-actions{
+  display:flex;
+  gap:8px;
 }
 
 button{
-border:0;
-border-radius:13px;
-padding:12px 16px;
-font-weight:700;
-cursor:pointer;
-font:inherit
-}
-
-.primary{
-background:#1266f1;
-color:white
+  border:0;
+  border-radius:13px;
+  padding:12px 16px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 .white{
-background:white;
-color:#1266f1
+  background:white;
+  color:#1266f1;
+}
+
+.primary{
+  background:#1266f1;
+  color:white;
+}
+
+.dark{
+  background:#172033;
+  color:white;
+}
+
+.hero{
+  text-align:center;
+  margin-top:42px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:32px;
+}
+
+.hero p{
+  max-width:650px;
+  margin:12px auto 22px;
+  line-height:1.8;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 main{
-padding:0 16px;
-margin-top:24px
+  max-width:1000px;
+  margin:auto;
+  padding:0 16px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:-25px;
+}
+
+.stat{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.stat b{
+  display:block;
+  font-size:22px;
+}
+
+.stat span{
+  color:#718096;
+  font-size:12px;
 }
 
 .section-title{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:24px 0 12px
+  margin:32px 0 15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .section-title h2{
-margin:0;
-font-size:20px
-}
-
-.hint{
-color:#687386;
-font-size:12px
+  margin:0;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .card{
-background:white;
-border:1px solid #e6eaf0;
-border-radius:18px;
-padding:17px;
-text-align:right;
-box-shadow:0 5px 18px #1720330b;
-color:#172033
+  background:white;
+  border:1px solid #e5eaf1;
+  border-radius:18px;
+  padding:18px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
 }
 
 .icon{
-font-size:28px
+  font-size:30px;
 }
 
 .card b{
-display:block;
-margin:8px 0 4px
+  display:block;
+  margin:8px 0 5px;
 }
 
 .card span{
-color:#718096;
-font-size:12px
+  color:#718096;
+  font-size:12px;
 }
 
-.ad-box{
-margin:24px 0;
-background:linear-gradient(135deg,#fff,#eef7ff);
-border:1px solid #dcecff;
-border-radius:20px;
-padding:20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px
+.info{
+  margin:30px 0;
+  padding:22px;
+  background:#172033;
+  color:white;
+  border-radius:22px;
 }
 
-.ad-icon{
-font-size:30px
+.info p{
+  color:#d4dbea;
+  line-height:1.8;
 }
 
-.ad-box h3{
-margin:5px 0
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
-.ad-box p{
-margin:0;
-color:#687386;
-font-size:13px
+.step{
+  background:white;
+  color:#172033;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+}
+
+.step strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.ad-slot{
+  margin:25px 0;
+  padding:22px;
+  text-align:center;
+  border:2px dashed #cbd5e1;
+  border-radius:18px;
+  background:#eef2f7;
+  color:#718096;
+}
+
+.featured{
+  background:linear-gradient(135deg,#fff7d6,#ffffff);
+  border:1px solid #f1df9a;
+  padding:20px;
+  border-radius:22px;
+  margin:25px 0;
+}
+
+.featured h2{
+  margin-top:0;
+}
+
+.featured-item{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  margin-top:10px;
 }
 
 .cta{
-margin:24px 0;
-background:#172033;
-color:white;
-border-radius:20px;
-padding:20px
-}
-
-.cta h3{
-margin:0 0 7px
-}
-
-.cta p{
-margin:0 0 14px;
-color:#d7deea;
-font-size:13px
+  background:linear-gradient(135deg,#1266f1,#12a89d);
+  color:white;
+  padding:30px;
+  text-align:center;
+  border-radius:25px;
+  margin:30px 0;
 }
 
 footer{
-text-align:center;
-color:#778196;
-padding:25px 10px;
-font-size:12px
+  padding:30px;
+  text-align:center;
+  color:#718096;
+  font-size:13px;
 }
 
 .modal{
-display:none;
-position:fixed;
-inset:0;
-background:#0008;
-z-index:10;
-padding:18px;
-align-items:flex-end;
-justify-content:center
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:1000;
+  padding:15px;
+  align-items:flex-end;
+  justify-content:center;
 }
 
 .modal.open{
-display:flex
+  display:flex;
 }
 
-.box{
-background:white;
-width:min(560px,100%);
-border-radius:24px;
-padding:20px;
-max-height:92vh;
-overflow:auto
+.modal-box{
+  background:white;
+  width:min(600px,100%);
+  max-height:90vh;
+  overflow:auto;
+  padding:22px;
+  border-radius:25px 25px 0 0;
 }
 
-.box-head{
-display:flex;
-justify-content:space-between;
-align-items:center
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .close{
-background:#eef1f5;
-color:#333
+  background:#eef1f5;
+  color:#172033;
 }
 
 label{
-display:block;
-font-size:13px;
-font-weight:700;
-margin:14px 0 6px
+  display:block;
+  margin:15px 0 7px;
+  font-weight:bold;
+  font-size:13px;
 }
 
-input,
+input,select,textarea{
+  width:100%;
+  border:1px solid #dce3eb;
+  border-radius:12px;
+  padding:13px;
+  font-size:14px;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.submit{
+  width:100%;
+  margin-top:20px;
+}
+
+.message{
+  display:none;
+  padding:12px;
+  margin-top:15px;
+  border-radius:12px;
+  background:#e7fff0;
+  color:#087443;
+}
+
+.message.show{
+  display:block;
+}
+
+@media(max-width:650px){
+
+  .top{
+    align-items:flex-start;
+  }
+
+  .top-actions{
+    flex-direction:column;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .steps{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .hero h1{
+    font-size:26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+
+<div class="top">
+
+<div>
+<div class="logo">خِدْمَتي 🛠️</div>
+<div class="tag">منصة الخدمات الذكية</div>
+</div>
+
+<div class="top-actions">
+<button class="white" onclick="openRequest()">اطلب خدمة</button>
+<button class="dark" onclick="openProvider()">قدم خدمة</button>
+</div>
+
+</div>
+
+<div class="hero">
+
+<h1>اطلب خدمتك… والنظام يبحث لك تلقائياً</h1>
+
+<p>
+خِدْمَتي تربط طلبك تلقائياً بمقدم خدمة مناسب حسب نوع الخدمة والمنطقة.
+</p>
+
+<div class="hero-buttons">
+<button class="white" onclick="openRequest()">اطلب خدمة الآن</button>
+<button class="dark" onclick="openProvider()">سجل كمقدم خدمة</button>
+</div>
+
+</div>
+
+</div>
+</header>
+
+<main>
+
+<div class="stats">
+<div class="stat">
+<b id="providerCount">0</b>
+<span>مقدمو خدمات</span>
+</div>
+
+<div class="stat">
+<b id="requestCount">0</b>
+<span>طلبات الخدمات</span>
+</div>
+
+<div class="stat">
+<b>24/7</b>
+<span>النظام يعمل تلقائياً</span>
+</div>
+</div>
+
+<div class="section-title">
+<h2>اختر الخدمة</h2>
+<span>اضغط للطلب</span>
+</div>
+
+<div class="grid">
+
+<div class="card" onclick="quickRequest('صيانة منزلية')">
+<div class="icon">🔧</div>
+<b>صيانة منزلية</b>
+<span>كهرباء وسباكة وإصلاحات</span>
+</div>
+
+<div class="card" onclick="quickRequest('صيانة موبايلات')">
+<div class="icon">📱</div>
+<b>صيانة موبايلات</b>
+<span>هواتف وكمبيوتر</span>
+</div>
+
+<div class="card" onclick="quickRequest('خدمات سيارات')">
+<div class="icon">🚗</div>
+<b>خدمات سيارات</b>
+<span>ميكانيك وصيانة</span>
+</div>
+
+<div class="card" onclick="quickRequest('تنظيف')">
+<div class="icon">🧹</div>
+<b>تنظيف</b>
+<span>منازل ومكاتب</span>
+</div>
+
+<div class="card" onclick="quickRequest('دهان وديكور')">
+<div class="icon">🎨</div>
+<b>دهان وديكور</b>
+<span>دهان وتصميم</span>
+</div>
+
+<div class="card" onclick="quickRequest('دروس خصوصية')">
+<div class="icon">📚</div>
+<b>دروس خصوصية</b>
+<span>تعليم ودروس</span>
+</div>
+
+<div class="card" onclick="quickRequest('توصيل')">
+<div class="icon">🛵</div>
+<b>توصيل</b>
+<span>طلبات ومشاوير</span>
+</div>
+
+<div class="card" onclick="quickRequest('خدمات رقمية')">
+<div class="icon">💻</div>
+<b>خدمات رقمية</b>
+<span>تصميم وبرمجة</span>
+</div>
+
+</div>
+
+<div class="ad-slot">
+📢 مساحة إعلانية رقم 1 — إعلان مدفوع
+</div>
+
+<div class="info">
+
+<h2>كيف يعمل خِدْمَتي؟</h2>
+
+<p>
+أنت تطلب الخدمة، والنظام يبحث عن مقدم خدمة مسجل بنفس الخدمة والمنطقة.
+</p>
+
+<div class="steps">
+
+<div class="step">
+<strong>1</strong>
+الزبون يطلب
+</div>
+
+<div class="step">
+<strong>2</strong>
+النظام يطابق
+</div>
+
+<div class="step">
+<strong>3</strong>
+مقدم الخدمة يقبل
+</div>
+
+<div class="step">
+<strong>4</strong>
+يتم تنفيذ الخدمة
+</div>
+
+</div>
+
+</div>
+
+<div class="featured">
+
+<h2>⭐ خدمات وإعلانات مميزة</h2>
+
+<div class="featured-item">
+<b>مكان إعلان مميز</b>
+<p>يمكن لأصحاب الخدمات الظهور في مقدمة النتائج.</p>
+</div>
+
+<div class="featured-item">
+<b>إعلان شركة أو محل</b>
+<p>مساحة مخصصة للإعلانات المدفوعة.</p>
+</div>
+
+</div>
+
+<div class="ad-slot">
+📢 مساحة إعلانية رقم 2
+</div>
+
+<div class="cta">
+
+<h2>بدك زبائن لخدمتك؟</h2>
+
+<p>
+سجل خدمتك، واستقبل الطلبات المطابقة لخدمتك ومنطقتك.
+</p>
+
+<button class="dark" onclick="openProvider()">سجل كمقدم خدمة</button>
+
+</div>
+
+<div class="ad-slot">
+💰 مساحة إعلانية رقم 3
+</div>
+
+</main>
+
+<footer>
+© 2026 خِدْمَتي — منصة الخدمات الذكية
+</footer>
+
+<div class="modal" id="requestModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>طلب خدمة</h2>
+<button class="close" onclick="closeRequest()">✕</button>
+</div>
+
+<form id="requestForm">
+
+<label>اسمك</label>
+<input id="customerName" required>
+
+<label>رقم الهاتف</label>
+<input id="customerPhone" required type="tel">
+
+<label>المدينة أو المنطقة</label>
+<input id="customerCity" required placeholder="مثلاً اللاذقية">
+
+<label>الخدمة المطلوبة</label>
+
+<select id="requestService">
+<option>صيانة منزلية</option>
+<option>صيانة موبايلات</option>
+<option>خدمات سيارات</option>
+<option>تنظيف</option>
+<option>دهان وديكور</option>
+<option>دروس خصوصية</option>
+<option>توصيل</option>
+<option>خدمات رقمية</option>
+</select>
+
+<label>تفاصيل الطلب</label>
+<textarea id="requestDetails"></textarea>
+
+<button class="primary submit" type="submit">
+إرسال الطلب
+</button>
+
+<div class="message" id="requestMessage">
+تم إرسال طلبك بنجاح ✅ النظام يبحث عن مقدم خدمة مناسب.
+</div>
+
+</form>
+
+</div>
+</div>
+
+<div class="modal" id="providerModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>تسجيل مقدم خدمة</h2>
+<button class="close" onclick="closeProvider()">✕</button>
+</div>
+
+<form id="providerForm">
+
+<label>اسمك أو اسم النشاط</label>
+<input id="providerName" required>
+
+<label>رقم الهاتف</label>
+<input id="providerPhone" required type="tel">
+
+<label>المدينة أو المنطقة</label>
+<input id="providerCity" required>
+
+<label>الخدمة التي تقدمها</label>
+
+<select id="providerService">
+<option>صيانة منزلية</option>
+<option>صيانة موبايلات</option>
+<option>خدمات سيارات</option>
+<option>تنظيف</option>
+<option>دهان وديكور</option>
+<option>دروس خصوصية</option>
+<option>توصيل</option>
+<option>خدمات رقمية</option>
+</select>
+
+<label>وصف الخدمة</label>
+<textarea id="providerDetails"></textarea>
+
+<button class="primary submit" type="submit">
+تسجيل الخدمة
+</button>
+
+<div class="message" id="providerMessage">
+تم تسجيل خدمتك بنجاح ✅
+</div>
+
+</form>
+
+</div>
+</div>
+
+<script>
+
+function getProviders(){
+  return JSON.parse(localStorage.getItem("khidmatiProviders") || "[]");
+}
+
+function getRequests(){
+  return JSON.parse(localStorage.getItem("khidmatiRequests") || "[]");
+}
+
+function saveProviders(data){
+  localStorage.setItem("khidmatiProviders",JSON.stringify(data));
+}
+
+function saveRequests(data){
+  localStorage.setItem("khidmatiRequests",JSON.stringify(data));
+}
+
+function updateStats(){
+
+  document.getElementById("providerCount").textContent =
+  getProviders().length;
+
+  document.getElementById("requestCount").textContent =
+  getRequests().length;
+
+}
+
+function openRequest(){
+  document.getElement
